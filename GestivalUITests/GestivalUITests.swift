@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Gestival
 
 class GestivalUITests: XCTestCase {
 
@@ -26,7 +27,15 @@ class GestivalUITests: XCTestCase {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
-
+        
+        app.textFields["Your Email"].tap()
+        app.typeText("email")
+        
+        app.textFields["Password"].tap()
+        app.typeText("password")
+        app/*@START_MENU_TOKEN@*/.buttons["로그인"].staticTexts["로그인"]/*[[".buttons[\"로그인\"].staticTexts[\"로그인\"]",".staticTexts[\"로그인\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/.tap()
+        
+                
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
