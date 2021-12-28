@@ -9,7 +9,10 @@ import UIKit
 
 final class LoginVC: UIViewController {
 
-    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,6 +20,10 @@ final class LoginVC: UIViewController {
     }
     
     @IBAction func loginButtonDidTap(_ sender: UIButton){
+        let user = loginRequestUser(email: emailTextField.text ?? "",
+                                    password: passwordTextField.text ?? "")
+        NetworkManager.shared.requestLogin(user)
+        
         guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)

@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657AD6C277ABBCA00E4F006 /* ViewController.swift */; };
 		468D426927795C770044E64D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D426827795C770044E64D /* LoginVC.swift */; };
 		468D426B277960310044E64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE7276B30B200ABFC31 /* Main.storyboard */; };
 		468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D426C27796A0A0044E64D /* RegisterVC.swift */; };
 		468D42772779AFD40044E64D /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42762779AFD40044E64D /* IntExt.swift */; };
 		468D42792779B7260044E64D /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42782779B7260044E64D /* ItemCell.swift */; };
+		468D427E2779E08D0044E64D /* GDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D427D2779E08D0044E64D /* GDAPI.swift */; };
+		468D42812779F30C0044E64D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42802779F30C0044E64D /* User.swift */; };
+		468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42822779FC8A0044E64D /* NetworkManager.swift */; };
 		46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */; };
 		46EE1BE4276B30B200ABFC31 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE3276B30B200ABFC31 /* art.scnassets */; };
-		46EE1BE6276B30B200ABFC31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BE5276B30B200ABFC31 /* ViewController.swift */; };
 		46EE1BEB276B30B300ABFC31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BEA276B30B300ABFC31 /* Assets.xcassets */; };
 		46EE1BEE276B30B300ABFC31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BEC276B30B300ABFC31 /* LaunchScreen.storyboard */; };
 		46EE1BF8276B30B300ABFC31 /* GestivalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BF7276B30B300ABFC31 /* GestivalTests.swift */; };
@@ -47,6 +50,8 @@
 		145F9FD8601F78C845E2BFB6 /* Pods_Gestival.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gestival.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D7DA02B937BC54C1127675 /* Pods-Gestival-GestivalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival-GestivalUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestivalTests.debug.xcconfig"; path = "Target Support Files/Pods-GestivalTests/Pods-GestivalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4657AD6B277AA88200E4F006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4657AD6C277ABBCA00E4F006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		468D42642779573E0044E64D /* Segoe UI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI.ttf"; sourceTree = "<group>"; };
 		468D42652779573E0044E64D /* Segoe UI Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI Bold.ttf"; sourceTree = "<group>"; };
 		468D42662779573E0044E64D /* Segoe UI Bold Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI Bold Italic.ttf"; sourceTree = "<group>"; };
@@ -55,10 +60,12 @@
 		468D426C27796A0A0044E64D /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		468D42762779AFD40044E64D /* IntExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
 		468D42782779B7260044E64D /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		468D427D2779E08D0044E64D /* GDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAPI.swift; sourceTree = "<group>"; };
+		468D42802779F30C0044E64D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		468D42822779FC8A0044E64D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		46EE1BDE276B30B200ABFC31 /* Gestival.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gestival.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE1BE3276B30B200ABFC31 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
-		46EE1BE5276B30B200ABFC31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		46EE1BE8276B30B200ABFC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46EE1BEA276B30B300ABFC31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		46EE1BED276B30B300ABFC31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		468D426E27799B3E0044E64D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				468D427F2779F3070044E64D /* Model */,
 				468D42732779AFC20044E64D /* Extensions */,
 			);
 			path = Common;
@@ -144,6 +152,31 @@
 			path = Int;
 			sourceTree = "<group>";
 		};
+		468D427B2779E0650044E64D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				468D427C2779E0680044E64D /* Network */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		468D427C2779E0680044E64D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				468D427D2779E08D0044E64D /* GDAPI.swift */,
+				468D42822779FC8A0044E64D /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		468D427F2779F3070044E64D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				468D42802779F30C0044E64D /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		46EE1BD5276B30B200ABFC31 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +202,8 @@
 		46EE1BE0276B30B200ABFC31 /* Gestival */ = {
 			isa = PBXGroup;
 			children = (
+				46EE1BE3276B30B200ABFC31 /* art.scnassets */,
+				4657AD6B277AA88200E4F006 /* Info.plist */,
 				46EE1C13276B318A00ABFC31 /* Resource */,
 				46EE1C11276B317600ABFC31 /* App */,
 				46EE1C10276B317200ABFC31 /* Source */,
@@ -196,6 +231,7 @@
 		46EE1C10276B317200ABFC31 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				468D427B2779E0650044E64D /* Services */,
 				468D426E27799B3E0044E64D /* Common */,
 				46EE1C12276B317C00ABFC31 /* Scene */,
 			);
@@ -237,7 +273,6 @@
 		46EE1C14276B337000ABFC31 /* SCN */ = {
 			isa = PBXGroup;
 			children = (
-				46EE1BE3276B30B200ABFC31 /* art.scnassets */,
 			);
 			path = SCN;
 			sourceTree = "<group>";
@@ -246,7 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				46EE1BE7276B30B200ABFC31 /* Main.storyboard */,
-				46EE1BE5276B30B200ABFC31 /* ViewController.swift */,
+				4657AD6C277ABBCA00E4F006 /* ViewController.swift */,
 				468D42782779B7260044E64D /* ItemCell.swift */,
 			);
 			path = Main;
@@ -278,7 +313,6 @@
 				2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */,
 				C04BF0C3A5530138843F5C65 /* Pods-GestivalTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -522,9 +556,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EE1BE6276B30B200ABFC31 /* ViewController.swift in Sources */,
+				468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */,
+				468D427E2779E08D0044E64D /* GDAPI.swift in Sources */,
 				468D42772779AFD40044E64D /* IntExt.swift in Sources */,
+				4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */,
 				468D42792779B7260044E64D /* ItemCell.swift in Sources */,
+				468D42812779F30C0044E64D /* User.swift in Sources */,
 				468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */,
 				46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */,
 				468D426927795C770044E64D /* LoginVC.swift in Sources */,
@@ -709,6 +746,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 235C2RVZ7L;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gestival/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -717,6 +755,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -740,6 +779,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 235C2RVZ7L;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gestival/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -748,6 +788,7 @@
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

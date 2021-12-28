@@ -17,13 +17,14 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var screenshotButton: UIButton!
     
+    @IBOutlet weak var planeDetectedLbl: UILabel!
     private var selectedItem: String?
     
     private var selectedNode: SCNNode?
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
     
-    private let itemList: [String] = ["BACK","BACK"]
+    private let itemList: [String] = ["code","heart"]
     
     // MARK: - Helpers
     func registerGesture(){
@@ -39,11 +40,17 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addItem(_ res: SCNHitTestResult) {
         if let selectedItem = selectedItem {
-            let scene = SCNScene(named: "../../Resource/Scn/art.scnassets/\(selectedItem).dae")
+             
+            let scene = SCNScene(named: "art.scnassets/\(selectedItem).scn")
             let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
-            let transform = res.worldCoordinates
-            node.position = SCNVector3(x: transform.x, y: transform.y, z: transform.z)
             
+            let transform = res.worldCoordinates
+            print(res.worldNormal)
+            print(res.worldCoordinates)
+            
+            node.position = SCNVector3(x: transform.x, y: transform.y, z: transform.z)
+            node.scale = SCNVector3(1, 1, 1)
+//            node.boundingBox = (SCNVector3(1, 1, 1), SCNVector3(1, 1, 1))
             self.sceneView.scene.rootNode.addChildNode(node)
             
         }
@@ -57,19 +64,23 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.showsStatistics = true
         
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        
-        sceneView.scene = scene
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+//
+//        sceneView.scene = scene
         collectionView.delegate = self
         collectionView.dataSource = self
+        registerGesture()
+        self.sceneView.autoenablesDefaultLighting = true
         screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let configuration = ARWorldTrackingConfiguration()
-        
+        configuration.planeDetection = .horizontal
         
         
         sceneView.session.run(configuration)
@@ -106,6 +117,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     
     @objc func pinchAction(_ sender: UIPinchGestureRecognizer){
+        print("pinch")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
         let hit = sceneView.hitTest(location, options: [:])
@@ -118,6 +130,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     @objc func rotateAction(_ sender: UILongPressGestureRecognizer){
+        print("LOTATE")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
         let hit = sceneView.hitTest(location, options: [:])
@@ -134,6 +147,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func deleteAction(_ sender: UITapGestureRecognizer){
+        print("DELETE")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
         guard let hit = sceneView.hitTest(location, options: nil).first else { return }
@@ -141,6 +155,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func panAction(_ sender: UIPanGestureRecognizer){
+        print("PAN")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
         switch sender.state{
@@ -157,12 +172,21 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
                 worldPosition.z - panLast.z
             )
             hit.node.localTranslate(by: movement)
-            self.panLast = worldPosition
+            self.panLast = movement
         default:
             return
         }
     }
     
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        guard anchor is ARPlaneAnchor else { return }
+        DispatchQueue.main.async {
+            self.planeDetectedLbl.isHidden = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.planeDetectedLbl.isHidden = true
+            }
+        }
+    }
     // MARK: - IBAction
     @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
         
