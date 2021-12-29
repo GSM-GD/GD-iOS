@@ -25,7 +25,7 @@ final class LoginVC: UIViewController {
         Task{
             
             do{
-                try await NetworkManager.shared.requestLogin(user)
+                _ = try await NetworkManager.shared.requestLogin(user)
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)

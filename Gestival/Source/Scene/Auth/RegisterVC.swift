@@ -13,14 +13,25 @@ final class RegisterVC: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     
-    @IBOutlet weak var passwordTextField: UIImageView!
-    
+    @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
     @IBAction func registerDidTap(_ sender: UIButton) {
-        
+        let user = registerRequestUser(name: nameTextField.text ?? "",
+                                       email: emailTextField.text ?? "",
+                                       password: passwordTextField.text ?? "")
+        Task{
+            do{
+                _ = try await NetworkManager.shared.requestRegister(user)
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }catch{
+                self.showAlert(title: "GD", message: "E-mail 또는 Nickname이 중복되었습니다.", completion: nil)
+            }
+        }
     }
 }

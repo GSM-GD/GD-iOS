@@ -3,7 +3,7 @@ struct loginRequestUser: Codable{
     let password: String
 }
 
-struct loginResponseUser: Codable{
+struct authResponseUser: Codable{
     let name: String
     let email: String
     let password: String
