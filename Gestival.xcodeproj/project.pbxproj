@@ -16,6 +16,7 @@
 		468D427E2779E08D0044E64D /* GDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D427D2779E08D0044E64D /* GDAPI.swift */; };
 		468D42812779F30C0044E64D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42802779F30C0044E64D /* User.swift */; };
 		468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42822779FC8A0044E64D /* NetworkManager.swift */; };
+		46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */; };
 		46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */; };
 		46EE1BE4276B30B200ABFC31 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE3276B30B200ABFC31 /* art.scnassets */; };
 		46EE1BEB276B30B300ABFC31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BEA276B30B300ABFC31 /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 		468D427D2779E08D0044E64D /* GDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAPI.swift; sourceTree = "<group>"; };
 		468D42802779F30C0044E64D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		468D42822779FC8A0044E64D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		46EE1BDE276B30B200ABFC31 /* Gestival.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gestival.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE1BE3276B30B200ABFC31 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 		468D42732779AFC20044E64D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				46D9798A277C847800AFBA18 /* UIKit */,
 				468D42742779AFC60044E64D /* Swift */,
 			);
 			path = Extensions;
@@ -175,6 +178,22 @@
 				468D42802779F30C0044E64D /* User.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		46D9798A277C847800AFBA18 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				46D9798B277C847A00AFBA18 /* UIViewController */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		46D9798B277C847A00AFBA18 /* UIViewController */ = {
+			isa = PBXGroup;
+			children = (
+				46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */,
+			);
+			path = UIViewController;
 			sourceTree = "<group>";
 		};
 		46EE1BD5276B30B200ABFC31 = {
@@ -556,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */,
 				468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */,
 				468D427E2779E08D0044E64D /* GDAPI.swift in Sources */,
 				468D42772779AFD40044E64D /* IntExt.swift in Sources */,

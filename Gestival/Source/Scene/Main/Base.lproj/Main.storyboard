@@ -175,6 +175,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginButtonDidTap:" destination="goU-KU-5Sc" eventType="touchUpInside" id="Bp5-0U-VUX"/>
+                                    <action selector="registerDidTap:" destination="goU-KU-5Sc" eventType="touchUpInside" id="0oR-qm-hPR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -206,7 +207,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="oHE-q4-Y4s" id="tTT-MO-Rht"/>
                         <outlet property="loginButton" destination="pk2-V0-jez" id="T0v-Zb-T0v"/>
+                        <outlet property="nameTextField" destination="LFV-OX-V8i" id="1FZ-sZ-Myj"/>
+                        <outlet property="passwordTextField" destination="HIQ-tb-aOB" id="YF6-ny-eQ8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUI-K9-tNG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -265,7 +269,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginButtonDidTap:" destination="dSc-zs-Ubo" eventType="touchUpInside" id="2CQ-ue-fdL"/>
+                                    <action selector="loginDIdTap:" destination="dSc-zs-Ubo" eventType="touchUpInside" id="eeA-pu-X15"/>
                                 </connections>
                             </button>
                         </subviews>

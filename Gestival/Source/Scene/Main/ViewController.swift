@@ -45,11 +45,10 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
             let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
             
             let transform = res.worldCoordinates
-            print(res.worldNormal)
-            print(res.worldCoordinates)
             
-            node.position = SCNVector3(x: transform.x, y: transform.y, z: transform.z)
-            node.scale = SCNVector3(1, 1, 1)
+            node.position = SCNVector3(x: 0.050978288, y: -0.046053383, z: -0.12612866)
+//            node.position = SCNVector3(x: transform.x, y: transform.y, z: transform.z)
+//            node.scale = SCNVector3(1, 1, 1)
 //            node.boundingBox = (SCNVector3(1, 1, 1), SCNVector3(1, 1, 1))
             self.sceneView.scene.rootNode.addChildNode(node)
             
@@ -65,9 +64,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-//        let scene = SCNScene(named: "art.scnassets/ship.scn")!
-//
-//        sceneView.scene = scene
         collectionView.delegate = self
         collectionView.dataSource = self
         registerGesture()

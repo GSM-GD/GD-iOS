@@ -19,14 +19,24 @@ final class LoginVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func loginButtonDidTap(_ sender: UIButton){
+    @IBAction func loginDIdTap(_ sender: Any) {
         let user = loginRequestUser(email: emailTextField.text ?? "",
                                     password: passwordTextField.text ?? "")
-        NetworkManager.shared.requestLogin(user)
+        Task{
+            
+            do{
+                try await NetworkManager.shared.requestLogin(user)
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }catch{
+                self.showAlert(title: "GD", message: "E-mail 또는 Password가 틀렸습니다.", completion: nil)
+            }
+                   
+        }
         
-        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+        
+        
     }
     
 }
