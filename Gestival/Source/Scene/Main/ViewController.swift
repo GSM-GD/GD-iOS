@@ -20,14 +20,12 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var isDeleteModeLabel: UILabel!
+    @IBOutlet weak var planeDetectedLbl: UILabel!
     private var selectedNode: SCNNode?
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
     
     private var isDeleteMode = false
-    
-    private let itemList: [String] = ["code","heart"]
-    
     // MARK: - Helpers
     func registerGesture(){
         let tapG = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
@@ -49,16 +47,21 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
             let transform = res.worldCoordinates
             
             node.position = SCNVector3(x: transform.x, y: transform.y, z: transform.z)
-//            node.scale = SCNVector3(1, 1, 1)
-//            node.boundingBox = (SCNVector3(1, 1, 1), SCNVector3(1, 1, 1))
             self.sceneView.scene.rootNode.addChildNode(node)
             
         }
     }
     
+    // MARK: - Init
+    deinit{
+        NetworkManager.shared.requestLogout()
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isHidden = true
         
         sceneView.delegate = self
         
@@ -69,6 +72,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         registerGesture()
         self.sceneView.autoenablesDefaultLighting = true
         screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        
         screenshotButton.imageView?.contentMode = .scaleAspectFill
     }
     
@@ -180,7 +184,12 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard anchor is ARPlaneAnchor else { return }
-        
+        DispatchQueue.main.async {
+            self.planeDetectedLbl.text = "Plane"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.planeDetectedLbl.text = ""
+            }
+        }
     }
     // MARK: - IBAction
     
@@ -199,40 +208,14 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
 }
 
-// MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return itemList.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ItemCell else { return .init() }
-        cell.imageView.image = UIImage(named: itemList[indexPath.row])
-        return cell
-    }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        self.selectedItem = itemList[indexPath.row]
-        cell?.backgroundColor = .orange
-    }
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor = .clear
-    }
-    
-}
-
-// MARK: - UICollectionViewDelegateFlowLayout
-extension ViewController: UICollectionViewDelegateFlowLayout{
-    
-}
-
 extension ViewController: itemVCDelegate{
     func itemDidSelected(name: String) {
         self.selectedItem = name
         print(selectedItem)
         itemSelectButton.setImage(UIImage(named: selectedItem ?? "")?.resizableImage(withCapInsets: .init(top: 0, left: 0, bottom: 0, right: 0)), for: .normal)
-        screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        itemSelectButton.imageView?.contentMode = .scaleAspectFit
+        itemSelectButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        itemSelectButton.clipsToBounds = true
         self.dismiss(animated: true)
     }
 }

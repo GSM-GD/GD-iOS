@@ -49,14 +49,16 @@ final class NetworkManager: NetworkManagerType{
                 switch result{
                 case let .success(res):
                     if res.statusCode == 400{
-                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
+//                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
                     }
                     let response = try? JSONDecoder().decode(authResponseUser.self, from: res.data)
                     print("ASDFD")
                     print(response)
                     config.resume(returning: response ?? .init(name: "", email: "", password: ""))
                 case let .failure(err):
-                    config.resume(throwing: err)
+                    config.resume(returning: .init(name: "", email: "", password: ""))
+                    
+//                    config.resume(throwing: err)
                 }
             }
         })

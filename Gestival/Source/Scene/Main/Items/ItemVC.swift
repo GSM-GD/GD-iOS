@@ -19,7 +19,14 @@ final class ItemVC: UIViewController{
     
     private let dataSource: [Item] = [
         Item(imageName: "heart", itemName: "Heart"),
-        Item(imageName: "code", itemName: "Code")
+        Item(imageName: "code", itemName: "Code"),
+        Item(imageName: "box", itemName: "Box"),
+        Item(imageName: "cursor", itemName: "Cursor"),
+        Item(imageName: "good", itemName: "Good"),
+        Item(imageName: "snowman", itemName: "Snowman"),
+        Item(imageName: "ok", itemName: "Ok"),
+        Item(imageName: "milk", itemName: "Milk"),
+        Item(imageName: "pen", itemName: "Pen")
     ]
     
     override func viewDidLoad() {
