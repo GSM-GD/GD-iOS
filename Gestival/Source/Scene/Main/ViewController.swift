@@ -13,16 +13,18 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Properties
     @IBOutlet var sceneView: ARSCNView!
     
-    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var screenshotButton: UIButton!
+    @IBOutlet weak var itemSelectButton: UIButton!
+    private var selectedItem: String? = "heart"
     
-    @IBOutlet weak var planeDetectedLbl: UILabel!
-    private var selectedItem: String?
-    
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var isDeleteModeLabel: UILabel!
     private var selectedNode: SCNNode?
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
+    
+    private var isDeleteMode = false
     
     private let itemList: [String] = ["code","heart"]
     
@@ -63,12 +65,11 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        
         registerGesture()
         self.sceneView.autoenablesDefaultLighting = true
         screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
-        
+        screenshotButton.imageView?.contentMode = .scaleAspectFill
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +102,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Selector
     @objc func tapAction(_ sender: UITapGestureRecognizer){
+        if isDeleteMode { return }
         print("ASDAF")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
@@ -143,6 +145,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func deleteAction(_ sender: UITapGestureRecognizer){
         print("DELETE")
+        if !isDeleteMode { return }
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
         guard let hit = sceneView.hitTest(location, options: nil).first else { return }
@@ -156,18 +159,20 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         switch sender.state{
         case .began:
             guard let hit = scene.hitTest(location, options: nil).first else { return }
-            panStartZ = CGFloat(scene.projectPoint(panLast).z)
-            panLast = hit.worldCoordinates
+            self.selectedNode = hit.node
         case .changed:
             guard let hit = scene.hitTest(location, options: nil).first else { return }
-            let worldPosition = scene.unprojectPoint(SCNVector3(location.x, location.y, panStartZ))
-            let movement = SCNVector3(
-                worldPosition.x - panLast.x,
-                worldPosition.y - panLast.y,
-                worldPosition.z - panLast.z
-            )
-            hit.node.localTranslate(by: movement)
-            self.panLast = movement
+            
+            guard let selectedNode = selectedNode else {
+                return
+            }
+
+            self.selectedNode!.position = SCNVector3(hit.worldCoordinates.x,
+                                                     self.selectedNode!.position.y,
+                                                     hit.worldCoordinates.z)
+        case .ended, .cancelled, .failed:
+            guard let _ = selectedNode else { return }
+            self.selectedNode = nil
         default:
             return
         }
@@ -175,17 +180,23 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         guard anchor is ARPlaneAnchor else { return }
-        DispatchQueue.main.async {
-            self.planeDetectedLbl.isHidden = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.planeDetectedLbl.isHidden = true
-            }
-        }
-    }
-    // MARK: - IBAction
-    @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
         
     }
+    // MARK: - IBAction
+    
+    @IBAction func itemSelectButtonDidTap(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }
+    
+    @IBAction func deleteButtonDidTap(_ sender: UIButton) {
+        self.isDeleteMode = !isDeleteMode
+        isDeleteModeLabel.text = isDeleteMode ? "Delete Mode" : ""
+        
+    }
+    
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -214,4 +225,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
 // MARK: - UICollectionViewDelegateFlowLayout
 extension ViewController: UICollectionViewDelegateFlowLayout{
     
+}
+
+extension ViewController: itemVCDelegate{
+    func itemDidSelected(name: String) {
+        self.selectedItem = name
+        print(selectedItem)
+        itemSelectButton.setImage(UIImage(named: selectedItem ?? "")?.resizableImage(withCapInsets: .init(top: 0, left: 0, bottom: 0, right: 0)), for: .normal)
+        screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        self.dismiss(animated: true)
+    }
 }

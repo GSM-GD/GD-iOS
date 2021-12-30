@@ -21,21 +21,22 @@ final class NetworkManager: NetworkManagerType{
     var provider: MoyaProvider<GDAPI> = .init()
     
     func requestLogin(_ user: loginRequestUser) async throws -> authResponseUser{
-        try await withCheckedThrowingContinuation({ config in
+         try await withCheckedThrowingContinuation({ config in
             provider.request(.requestLogin(user)) { result in
                 switch result{
                 case let .success(res):
+                    
+                    let response = try? JSONDecoder().decode(authResponseUser.self, from: res.data)
+                    print(response)
                     if res.statusCode == 400{
                         config.resume(throwing: GDError.emailOrPasswordIncorrect)
+                        return
                     }
-                    let response = try? JSONDecoder().decode(authResponseUser.self, from: res.data)
-                    print("asdf")
-                    print(response)
                     config.resume(returning: response ?? .init(name: "", email: "", password: ""))
                     
                 case let .failure(err):
                     config.resume(throwing: err)
-                
+                    return
                 }
             }
             
@@ -63,7 +64,14 @@ final class NetworkManager: NetworkManagerType{
     
     
     func requestLogout() {
-        
+        provider.request(.requestLogout) { result in
+            switch result{
+            case let .success(res):
+                print(try! res.mapJSON())
+            case let .failure(err):
+                print(err.localizedDescription)
+            }
+        }
     }
 }
 

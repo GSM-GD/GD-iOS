@@ -12,11 +12,13 @@
 		468D426B277960310044E64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE7276B30B200ABFC31 /* Main.storyboard */; };
 		468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D426C27796A0A0044E64D /* RegisterVC.swift */; };
 		468D42772779AFD40044E64D /* IntExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42762779AFD40044E64D /* IntExt.swift */; };
-		468D42792779B7260044E64D /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42782779B7260044E64D /* ItemCell.swift */; };
 		468D427E2779E08D0044E64D /* GDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D427D2779E08D0044E64D /* GDAPI.swift */; };
 		468D42812779F30C0044E64D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42802779F30C0044E64D /* User.swift */; };
 		468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42822779FC8A0044E64D /* NetworkManager.swift */; };
 		46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */; };
+		46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C3277D7A9D00AFBA18 /* ItemVC.swift */; };
+		46D979C6277D7AA200AFBA18 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C5277D7AA200AFBA18 /* ItemCell.swift */; };
+		46D979C8277D7C9500AFBA18 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C7277D7C9500AFBA18 /* Item.swift */; };
 		46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */; };
 		46EE1BE4276B30B200ABFC31 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE3276B30B200ABFC31 /* art.scnassets */; };
 		46EE1BEB276B30B300ABFC31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BEA276B30B300ABFC31 /* Assets.xcassets */; };
@@ -60,11 +62,13 @@
 		468D426827795C770044E64D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		468D426C27796A0A0044E64D /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		468D42762779AFD40044E64D /* IntExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExt.swift; sourceTree = "<group>"; };
-		468D42782779B7260044E64D /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		468D427D2779E08D0044E64D /* GDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAPI.swift; sourceTree = "<group>"; };
 		468D42802779F30C0044E64D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		468D42822779FC8A0044E64D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
+		46D979C3277D7A9D00AFBA18 /* ItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVC.swift; sourceTree = "<group>"; };
+		46D979C5277D7AA200AFBA18 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		46D979C7277D7C9500AFBA18 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		46EE1BDE276B30B200ABFC31 /* Gestival.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gestival.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE1BE1276B30B200ABFC31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE1BE3276B30B200ABFC31 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				468D42802779F30C0044E64D /* User.swift */,
+				46D979C7277D7C9500AFBA18 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -194,6 +199,15 @@
 				46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */,
 			);
 			path = UIViewController;
+			sourceTree = "<group>";
+		};
+		46D979C2277D7A9000AFBA18 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				46D979C3277D7A9D00AFBA18 /* ItemVC.swift */,
+				46D979C5277D7AA200AFBA18 /* ItemCell.swift */,
+			);
+			path = Items;
 			sourceTree = "<group>";
 		};
 		46EE1BD5276B30B200ABFC31 = {
@@ -299,9 +313,9 @@
 		46EE1C15276B354D00ABFC31 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				46D979C2277D7A9000AFBA18 /* Items */,
 				46EE1BE7276B30B200ABFC31 /* Main.storyboard */,
 				4657AD6C277ABBCA00E4F006 /* ViewController.swift */,
-				468D42782779B7260044E64D /* ItemCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -578,13 +592,15 @@
 				46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */,
 				468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */,
 				468D427E2779E08D0044E64D /* GDAPI.swift in Sources */,
+				46D979C6277D7AA200AFBA18 /* ItemCell.swift in Sources */,
+				46D979C8277D7C9500AFBA18 /* Item.swift in Sources */,
 				468D42772779AFD40044E64D /* IntExt.swift in Sources */,
 				4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */,
-				468D42792779B7260044E64D /* ItemCell.swift in Sources */,
 				468D42812779F30C0044E64D /* User.swift in Sources */,
 				468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */,
 				46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */,
 				468D426927795C770044E64D /* LoginVC.swift in Sources */,
+				46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
