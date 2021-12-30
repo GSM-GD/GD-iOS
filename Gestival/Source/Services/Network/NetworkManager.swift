@@ -8,6 +8,8 @@ protocol NetworkManagerType: class{
     func requestRegister(_ user: registerRequestUser) async throws -> authResponseUser
     
     func requestLogout()
+    
+    func requestPost(_ post: requestPost) async throws -> responsePost
 }
 
 enum GDError: String, Error{
@@ -62,6 +64,26 @@ final class NetworkManager: NetworkManagerType{
                 }
             }
         })
+    }
+    
+    func requestPost(_ post: requestPost) async throws -> responsePost{
+        try await withCheckedThrowingContinuation { config in
+            provider.request(.requestPost(post)) { result in
+                switch result{
+                case let .success(res):
+                    do{
+                        print(try res.mapJSON())
+                        let response = try JSONDecoder().decode(responsePost.self, from: res.data)
+                        config.resume(returning: response)
+                    }catch{
+                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
+                    }
+                case let .failure(err):
+                    config.resume(throwing: err)
+                }
+                
+            }
+        }
     }
     
     

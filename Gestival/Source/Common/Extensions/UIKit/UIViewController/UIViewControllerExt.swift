@@ -13,4 +13,12 @@ extension UIViewController{
         alert.addAction(.init(title: "확인", style: .default, handler: completion))
         self.present(alert, animated: true)
     }
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

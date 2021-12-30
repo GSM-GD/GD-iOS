@@ -38,6 +38,16 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         [tapG, pinG, rotateG, deleteG, panG].forEach{ sceneView.addGestureRecognizer($0) }
     }
     
+    func configureScreenshotButton(){
+        screenshotButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        screenshotButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        screenshotButton.setTitle("", for: .normal)
+        screenshotButton.backgroundColor = .lightGray
+        screenshotButton.layer.cornerRadius = 40
+        screenshotButton.clipsToBounds = true
+        
+    }
+    
     func addItem(_ res: SCNHitTestResult) {
         if let selectedItem = selectedItem {
              
@@ -61,7 +71,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isHidden = true
+        configureScreenshotButton()
         
         sceneView.delegate = self
         
@@ -72,16 +82,16 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         registerGesture()
         self.sceneView.autoenablesDefaultLighting = true
         screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
-        
+        screenshotButton.clipsToBounds = true
         screenshotButton.imageView?.contentMode = .scaleAspectFill
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.navigationController?.navigationBar.isHidden = true
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
-        
+        self.deleteButton.isHidden = false
         
         sceneView.session.run(configuration)
     }
@@ -205,6 +215,15 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         isDeleteModeLabel.text = isDeleteMode ? "Delete Mode" : ""
         
     }
+    @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "uploadPostVC") as! UploadPostVC
+        self.deleteButton.isHidden = true
+        self.planeDetectedLbl.text = ""
+        
+        let image = sceneView.snapshot()
+        vc.image = image
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
@@ -214,7 +233,7 @@ extension ViewController: itemVCDelegate{
         print(selectedItem)
         itemSelectButton.setImage(UIImage(named: selectedItem ?? "")?.resizableImage(withCapInsets: .init(top: 0, left: 0, bottom: 0, right: 0)), for: .normal)
         itemSelectButton.imageView?.contentMode = .scaleAspectFit
-        itemSelectButton.layer.cornerRadius = screenshotButton.frame.width / 2
+        itemSelectButton.layer.cornerRadius = itemSelectButton.frame.width / 2
         itemSelectButton.clipsToBounds = true
         self.dismiss(animated: true)
     }

@@ -13,10 +13,13 @@ final class LoginVC: UIViewController {
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var toRegisterButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        emailTextField.textColor = .black
+        passwordTextField.textColor = .black
         // Do any additional setup after loading the view.
+        toRegisterButton.setTitleColor(.black, for: .normal)
     }
     
     @IBAction func loginDIdTap(_ sender: UIButton) {
@@ -26,11 +29,10 @@ final class LoginVC: UIViewController {
             
             do{
                 _ = try await NetworkManager.shared.requestLogin(user)
-                
-                
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
+                let viewCon = UINavigationController(rootViewController: vc)
+                viewCon.modalPresentationStyle = .fullScreen
+                present(viewCon, animated: true, completion: nil)
                 
                 
             }catch{

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		462C451D277D9F6E0022AAC1 /* UploadPostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462C451C277D9F6E0022AAC1 /* UploadPostVC.swift */; };
+		462C451F277DA62E0022AAC1 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 462C451E277DA62E0022AAC1 /* Post.swift */; };
 		4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4657AD6C277ABBCA00E4F006 /* ViewController.swift */; };
 		468D426927795C770044E64D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D426827795C770044E64D /* LoginVC.swift */; };
 		468D426B277960310044E64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE1BE7276B30B200ABFC31 /* Main.storyboard */; };
@@ -53,6 +55,8 @@
 		145F9FD8601F78C845E2BFB6 /* Pods_Gestival.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gestival.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D7DA02B937BC54C1127675 /* Pods-Gestival-GestivalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival-GestivalUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestivalTests.debug.xcconfig"; path = "Target Support Files/Pods-GestivalTests/Pods-GestivalTests.debug.xcconfig"; sourceTree = "<group>"; };
+		462C451C277D9F6E0022AAC1 /* UploadPostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostVC.swift; sourceTree = "<group>"; };
+		462C451E277DA62E0022AAC1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		4657AD6B277AA88200E4F006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4657AD6C277ABBCA00E4F006 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		468D42642779573E0044E64D /* Segoe UI.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Segoe UI.ttf"; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 			children = (
 				468D42802779F30C0044E64D /* User.swift */,
 				46D979C7277D7C9500AFBA18 /* Item.swift */,
+				462C451E277DA62E0022AAC1 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 		46EE1C16276B359A00ABFC31 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				462C451C277D9F6E0022AAC1 /* UploadPostVC.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 				468D427E2779E08D0044E64D /* GDAPI.swift in Sources */,
 				46D979C6277D7AA200AFBA18 /* ItemCell.swift in Sources */,
 				46D979C8277D7C9500AFBA18 /* Item.swift in Sources */,
+				462C451F277DA62E0022AAC1 /* Post.swift in Sources */,
 				468D42772779AFD40044E64D /* IntExt.swift in Sources */,
 				4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */,
 				468D42812779F30C0044E64D /* User.swift in Sources */,
@@ -601,6 +608,7 @@
 				46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */,
 				468D426927795C770044E64D /* LoginVC.swift in Sources */,
 				46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */,
+				462C451D277D9F6E0022AAC1 /* UploadPostVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
