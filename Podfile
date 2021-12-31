@@ -4,6 +4,7 @@
 target 'Gestival' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
+  pod 'Kingfisher'
 
   # Pods for Gestival
 pod 'Moya', '~> 15.0.0'

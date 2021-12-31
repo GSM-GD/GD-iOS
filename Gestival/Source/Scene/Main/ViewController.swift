@@ -64,7 +64,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Init
     deinit{
-        NetworkManager.shared.requestLogout()
+//        NetworkManager.shared.requestLogout()
     }
     
     // MARK: - Lifecycle
@@ -98,7 +98,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        self.navigationController?.navigationBar.isHidden = false
         
         sceneView.session.pause()
     }
@@ -249,7 +249,8 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func postListButtonDidTap(_ sender: UIButton) {
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "postListVC") as! PostListVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
 }

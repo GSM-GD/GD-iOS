@@ -12,6 +12,8 @@ protocol NetworkManagerType: class{
     func requestPost(_ post: requestPost) async throws -> responsePost
     
     func requestSave(_ objects: [Save]) async throws -> [Save]
+    
+    func requestAllPost() async throws -> [Post]
 }
 
 enum GDError: String, Error{
@@ -89,8 +91,12 @@ final class NetworkManager: NetworkManagerType{
     }
     
     func requestSave(_ objects: [Save]) async throws -> [Save] {
+        
         try await withCheckedThrowingContinuation({ config in
-            provider.request(.requestSave(objects)) { result in
+            
+            let objs = objects.filter{ $0.objectName.isEmpty == false }
+            print(objs)
+            provider.request(.requestSave(objs)) { result in
                 switch result{
                 case let .success(res):
                     do{
@@ -102,6 +108,25 @@ final class NetworkManager: NetworkManagerType{
                 case let .failure(err):
                     config.resume(throwing: err)
                 }
+            }
+        })
+    }
+    
+    func requestAllPost() async throws -> [Post] {
+        try await withCheckedThrowingContinuation({ config in
+            provider.request(.requestAllPost) { result in
+                switch result{
+                case let .success(res):
+                    do{
+                        let posts = try JSONDecoder().decode([Post].self, from: res.data)
+                        config.resume(returning: posts)
+                    }catch{
+                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
+                    }
+                case let .failure(err):
+                    config.resume(throwing: err)
+                }
+            
             }
         })
     }

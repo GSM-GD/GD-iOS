@@ -1,12 +1,11 @@
 //
-//  uploadPostVC.swift
+//  UploadPostVC.swift
 //  Gestival
 //
-//  Created by 최형우 on 2021/12/30.
+//  Created by 최형우 on 2021/12/31.
 //
 
 import UIKit
-
 final class UploadPostVC: UIViewController{
     // MARK: - Properties
     @IBOutlet weak var imageVIew: UIImageView!

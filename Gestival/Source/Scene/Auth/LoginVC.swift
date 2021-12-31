@@ -20,6 +20,7 @@ final class LoginVC: UIViewController {
         passwordTextField.textColor = .black
         // Do any additional setup after loading the view.
         toRegisterButton.setTitleColor(.black, for: .normal)
+        hideKeyboard()
     }
     
     @IBAction func loginDIdTap(_ sender: UIButton) {

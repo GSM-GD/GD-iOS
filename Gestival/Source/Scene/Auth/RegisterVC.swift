@@ -16,9 +16,10 @@ final class RegisterVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailTextField.textColor = .black
+        nameTextField.textColor = .black
         emailTextField.textColor = .black
         passwordTextField.textColor = .black
+        hideKeyboard()
     }
     
     @IBAction func registerDidTap(_ sender: UIButton) {

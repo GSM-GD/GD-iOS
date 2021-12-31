@@ -18,3 +18,15 @@ struct responsePost: Codable{
     let content: String
     let imageData: Data
 }
+
+struct Post: Codable{
+    let writer: String
+    let content: String
+    let image: String
+    let title: String
+}
+
+struct postResult: Codable{
+    let count: Int
+    let results: [Post]
+}

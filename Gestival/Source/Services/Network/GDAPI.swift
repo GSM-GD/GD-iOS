@@ -6,6 +6,7 @@ enum GDAPI{
     case requestLogout
     case requestPost(requestPost)
     case requestSave([Save])
+    case requestAllPost
 }
 
 extension GDAPI: TargetType{
@@ -25,6 +26,8 @@ extension GDAPI: TargetType{
             return "/post/upload/"
         case .requestSave:
             return "/objects/save/"
+        case .requestAllPost:
+            return "/post/all/"
         }
     }
     
@@ -32,7 +35,7 @@ extension GDAPI: TargetType{
         switch self{
         case .requestLogin, .requestRegsiter, .requestPost, .requestSave:
             return .post
-        case .requestLogout:
+        case .requestLogout, .requestAllPost:
             return .get
         }
     }
@@ -73,6 +76,8 @@ extension GDAPI: TargetType{
             return .uploadMultipart(form)
         case let .requestSave(saves):
             return .requestJSONEncodable(saves)
+        case .requestAllPost:
+            return .requestPlain
         }
     }
     
@@ -80,7 +85,7 @@ extension GDAPI: TargetType{
         switch self{
         case .requestLogin, .requestRegsiter, .requestPost, .requestSave:
             return ["Content-Type": "multipart/form-data"]
-        case .requestLogout:
+        case .requestLogout, .requestAllPost:
             return nil
         }
     }
