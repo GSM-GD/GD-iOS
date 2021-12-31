@@ -47,9 +47,10 @@ final class UploadPostVC: UIViewController{
         print("TEST")
         Task{
             do{
-                try await NetworkManager.shared.requestPost(req)
+                _ = try await NetworkManager.shared.requestPost(req)
+                
             }catch{
-
+                self.showAlert(title: "GD", message: "게시물 업로드를 실패했습니다", completion: nil)
             }
             
         }

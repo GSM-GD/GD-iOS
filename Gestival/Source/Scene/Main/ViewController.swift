@@ -217,12 +217,39 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "uploadPostVC") as! UploadPostVC
-        self.deleteButton.isHidden = true
-        self.planeDetectedLbl.text = ""
+//        self.deleteButton.isHidden = true
+//        self.planeDetectedLbl.text = ""
         
         let image = sceneView.snapshot()
         vc.image = image
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        let objects: [Save] = self.sceneView.scene.rootNode
+            .childNodes
+            .map{
+                Save(
+                    objectName: $0.name ?? "",
+                    x: Double($0.worldPosition.x),
+                    y: Double($0.worldPosition.y),
+                    z: Double($0.worldPosition.z)
+                )
+            }
+        
+        Task {
+            do{
+                _ = try await NetworkManager.shared.requestSave(objects)
+                
+            }catch{
+                self.showAlert(title: "GD", message: "세이브를 실패했습니다", completion: nil)
+            }
+            
+        }
+    }
+    
+    @IBAction func postListButtonDidTap(_ sender: UIButton) {
+        
     }
     
 }
@@ -230,8 +257,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
 extension ViewController: itemVCDelegate{
     func itemDidSelected(name: String) {
         self.selectedItem = name
-        print(selectedItem)
-        itemSelectButton.setImage(UIImage(named: selectedItem ?? "")?.resizableImage(withCapInsets: .init(top: 0, left: 0, bottom: 0, right: 0)), for: .normal)
+        itemSelectButton.setImage(UIImage(named: selectedItem ?? ""), for: .normal)
         itemSelectButton.imageView?.contentMode = .scaleAspectFit
         itemSelectButton.layer.cornerRadius = itemSelectButton.frame.width / 2
         itemSelectButton.clipsToBounds = true

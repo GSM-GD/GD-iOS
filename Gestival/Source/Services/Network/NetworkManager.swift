@@ -10,6 +10,8 @@ protocol NetworkManagerType: class{
     func requestLogout()
     
     func requestPost(_ post: requestPost) async throws -> responsePost
+    
+    func requestSave(_ objects: [Save]) async throws -> [Save]
 }
 
 enum GDError: String, Error{
@@ -86,6 +88,23 @@ final class NetworkManager: NetworkManagerType{
         }
     }
     
+    func requestSave(_ objects: [Save]) async throws -> [Save] {
+        try await withCheckedThrowingContinuation({ config in
+            provider.request(.requestSave(objects)) { result in
+                switch result{
+                case let .success(res):
+                    do{
+                        let saves = try JSONDecoder().decode([Save].self, from: res.data)
+                        config.resume(returning: saves)
+                    }catch{
+                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
+                    }
+                case let .failure(err):
+                    config.resume(throwing: err)
+                }
+            }
+        })
+    }
     
     func requestLogout() {
         provider.request(.requestLogout) { result in

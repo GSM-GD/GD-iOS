@@ -5,6 +5,7 @@ enum GDAPI{
     case requestRegsiter(registerRequestUser)
     case requestLogout
     case requestPost(requestPost)
+    case requestSave([Save])
 }
 
 extension GDAPI: TargetType{
@@ -22,12 +23,14 @@ extension GDAPI: TargetType{
             return "/users/logout/"
         case .requestPost:
             return "/post/upload/"
+        case .requestSave:
+            return "/objects/save/"
         }
     }
     
     var method: Method {
         switch self{
-        case .requestLogin, .requestRegsiter, .requestPost:
+        case .requestLogin, .requestRegsiter, .requestPost, .requestSave:
             return .post
         case .requestLogout:
             return .get
@@ -59,7 +62,7 @@ extension GDAPI: TargetType{
         case let .requestPost(post):
             let form: [MultipartFormData] = [
                 MultipartFormData(provider: .data(post.imageData),
-                                  name: "image",fileName: "\(post.title).jpeg",
+                                  name: "image",fileName: "\(post.title)\(post.content).jpeg",
                                   mimeType: "image/jpeg"),
                 MultipartFormData(provider: .data(post.title.data(using: .utf8) ?? .init()),
                                   name: "title"),
@@ -68,12 +71,14 @@ extension GDAPI: TargetType{
             ]
             
             return .uploadMultipart(form)
+        case let .requestSave(saves):
+            return .requestJSONEncodable(saves)
         }
     }
     
     var headers: [String : String]? {
         switch self{
-        case .requestLogin, .requestRegsiter, .requestPost:
+        case .requestLogin, .requestRegsiter, .requestPost, .requestSave:
             return ["Content-Type": "multipart/form-data"]
         case .requestLogout:
             return nil
