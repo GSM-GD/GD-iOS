@@ -17,3 +17,15 @@ struct Save: Codable{
         case objectName = "object_name"
     }
 }
+
+
+struct Load: Codable{
+    let objectName: String
+    let x: Double
+    let y: Double
+    let z: Double
+    enum CodingKeys: String, CodingKey{
+        case x,y,z
+        case objectName = "object_name"
+    }
+}

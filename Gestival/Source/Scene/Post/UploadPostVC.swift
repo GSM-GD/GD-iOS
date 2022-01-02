@@ -43,11 +43,13 @@ final class UploadPostVC: UIViewController{
         let req = requestPost(title: titleTextField.text ?? "",
                               content: contentTextView.text ?? "",
                               imageData: image?.jpegData(compressionQuality: 0.95) ?? .init())
-        print("TEST")
         Task{
             do{
                 _ = try await NetworkManager.shared.requestPost(req)
-                
+                self.showAlert(title: "GD", message: "게시물 업로드를 성공했습니다.") { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                self.navigationController?.popViewController(animated: true)
             }catch{
                 self.showAlert(title: "GD", message: "게시물 업로드를 실패했습니다", completion: nil)
             }

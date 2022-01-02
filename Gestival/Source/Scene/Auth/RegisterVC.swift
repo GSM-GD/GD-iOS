@@ -28,7 +28,8 @@ final class RegisterVC: UIViewController {
                                        password: passwordTextField.text ?? "")
         Task{
             do{
-                _ = try await NetworkManager.shared.requestRegister(user)
+                let res = try await NetworkManager.shared.requestRegister(user)
+                UserDefaults.standard.set(res.name, forKey: "UserName")
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true, completion: nil)

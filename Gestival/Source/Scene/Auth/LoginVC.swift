@@ -29,7 +29,10 @@ final class LoginVC: UIViewController {
         Task{
             
             do{
-                _ = try await NetworkManager.shared.requestLogin(user)
+                let res = try await NetworkManager.shared.requestLogin(user)
+                
+                UserDefaults.standard.set(res.name, forKey: "UserName")
+                
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
                 let viewCon = UINavigationController(rootViewController: vc)
                 viewCon.modalPresentationStyle = .fullScreen

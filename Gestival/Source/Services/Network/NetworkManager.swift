@@ -112,6 +112,24 @@ final class NetworkManager: NetworkManagerType{
         })
     }
     
+    func requestLoad(_ name: String) async throws -> [Load] {
+        try await withCheckedThrowingContinuation({ config in
+            provider.request(.requestLoad(name)) { result in
+                switch result{
+                case let .success(res):
+                    do{
+                        let loaded = try JSONDecoder().decode([Load].self, from: res.data)
+                        config.resume(returning: loaded)
+                    }catch{
+                        config.resume(throwing: GDError.emailOrPasswordIncorrect)
+                    }
+                case let .failure(err):
+                    config.resume(throwing: err)
+                }
+            }
+        })
+    }
+    
     func requestAllPost() async throws -> [Post] {
         try await withCheckedThrowingContinuation({ config in
             provider.request(.requestAllPost) { result in

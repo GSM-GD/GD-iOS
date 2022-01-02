@@ -226,27 +226,55 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        let objects: [Save] = self.sceneView.scene.rootNode
-            .childNodes
-            .map{
-                Save(
-                    objectName: $0.name ?? "",
-                    x: Double($0.worldPosition.x),
-                    y: Double($0.worldPosition.y),
-                    z: Double($0.worldPosition.z)
-                )
-            }
-        
-        Task {
-            do{
-                _ = try await NetworkManager.shared.requestSave(objects)
-                
-            }catch{
-                self.showAlert(title: "GD", message: "세이브를 실패했습니다", completion: nil)
-            }
+        let alert = UIAlertController(title: "GD", message: "save / load", preferredStyle: .actionSheet)
+        let save = UIAlertAction(title: "저장", style: .default) { _ in
+            let objects: [Save] = self.sceneView.scene.rootNode
+                .childNodes
+                .map{
+                    Save(
+                        objectName: $0.name ?? "",
+                        x: Double($0.worldPosition.x),
+                        y: Double($0.worldPosition.y),
+                        z: Double($0.worldPosition.z)
+                    )
+                }
             
+            Task {
+                do{
+                    _ = try await NetworkManager.shared.requestSave(objects)
+                    
+                }catch{
+                    self.showAlert(title: "GD", message: "세이브를 실패했습니다", completion: nil)
+                }
+                
+            }
         }
+        let load = UIAlertAction(title: "불러오기", style: .default) { _ in
+            Task{
+                do{
+                    let name = UserDefaults.standard.string(forKey: "UserName") ?? ""
+                    let loaded = try await NetworkManager.shared.requestLoad(name)
+                    loaded.forEach { load in
+                        let scene = SCNScene(named: "art.scnassets/\(load.objectName).scn")
+                        let node = (scene?.rootNode.childNode(withName: load.objectName, recursively: false))!
+                        node.position = SCNVector3(load.x, load.y, load.z)
+                        self.sceneView.scene.rootNode.addChildNode(node)
+                    }
+                } catch {
+                    self.showAlert(title: "GD", message: "불러오기를 실패했습니다.", completion: nil)
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(save)
+        alert.addAction(load)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
+    
+    
     
     @IBAction func postListButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "postListVC") as! PostListVC

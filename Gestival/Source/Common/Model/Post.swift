@@ -16,7 +16,7 @@ struct requestPost: Codable{
 struct responsePost: Codable{
     let title: String
     let content: String
-    let imageData: Data
+    let image: String
 }
 
 struct Post: Codable{
