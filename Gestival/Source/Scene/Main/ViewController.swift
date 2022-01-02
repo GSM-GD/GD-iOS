@@ -265,10 +265,18 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
                 }
             }
         }
+        let reset = UIAlertAction(title: "초기화", style: .default) { _ in
+            self.sceneView.scene.rootNode.childNodes.forEach { node in
+                node.removeFromParentNode()
+                node.removeAllActions()
+            }
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(save)
         alert.addAction(load)
+        alert.addAction(reset)
         alert.addAction(cancel)
         
         self.present(alert, animated: true, completion: nil)
