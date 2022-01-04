@@ -31,8 +31,7 @@ final class RegisterVC: UIViewController {
                 let res = try await NetworkManager.shared.requestRegister(user)
                 UserDefaults.standard.set(res.name, forKey: "UserName")
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
+                self.navigationController?.popViewController(animated: true)
             }catch{
                 self.showAlert(title: "GD", message: "E-mail 또는 Nickname이 중복되었습니다.", completion: nil)
             }

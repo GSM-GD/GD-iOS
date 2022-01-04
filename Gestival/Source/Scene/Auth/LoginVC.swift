@@ -30,7 +30,7 @@ final class LoginVC: UIViewController {
             
             do{
                 let res = try await NetworkManager.shared.requestLogin(user)
-                
+                print(res)
                 UserDefaults.standard.set(res.name, forKey: "UserName")
                 
                 guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main") as? ViewController else { return }

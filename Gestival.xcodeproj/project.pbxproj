@@ -20,6 +20,8 @@
 		468D427E2779E08D0044E64D /* GDAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D427D2779E08D0044E64D /* GDAPI.swift */; };
 		468D42812779F30C0044E64D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42802779F30C0044E64D /* User.swift */; };
 		468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42822779FC8A0044E64D /* NetworkManager.swift */; };
+		46BC5D34278316D400AD7D40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BC5D33278316D400AD7D40 /* Config.swift */; };
+		46CBFD2227840BBB0065C13E /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CBFD2127840BBB0065C13E /* UIViewExt.swift */; };
 		46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */; };
 		46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C3277D7A9D00AFBA18 /* ItemVC.swift */; };
 		46D979C6277D7AA200AFBA18 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C5277D7AA200AFBA18 /* ItemCell.swift */; };
@@ -75,6 +77,8 @@
 		468D427D2779E08D0044E64D /* GDAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDAPI.swift; sourceTree = "<group>"; };
 		468D42802779F30C0044E64D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		468D42822779FC8A0044E64D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		46BC5D33278316D400AD7D40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		46CBFD2127840BBB0065C13E /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		46D979C3277D7A9D00AFBA18 /* ItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVC.swift; sourceTree = "<group>"; };
 		46D979C5277D7AA200AFBA18 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		468D42732779AFC20044E64D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				46BC5D32278316CF00AD7D40 /* API */,
 				46D9798A277C847800AFBA18 /* UIKit */,
 				468D42742779AFC60044E64D /* Swift */,
 			);
@@ -197,9 +202,26 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		46BC5D32278316CF00AD7D40 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				46BC5D33278316D400AD7D40 /* Config.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		46CBFD2027840BB50065C13E /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				46CBFD2127840BBB0065C13E /* UIViewExt.swift */,
+			);
+			path = UIView;
+			sourceTree = "<group>";
+		};
 		46D9798A277C847800AFBA18 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				46CBFD2027840BB50065C13E /* UIView */,
 				46D9798B277C847A00AFBA18 /* UIViewController */,
 			);
 			path = UIKit;
@@ -615,6 +637,8 @@
 				468D42772779AFD40044E64D /* IntExt.swift in Sources */,
 				4657AD6D277ABBCA00E4F006 /* ViewController.swift in Sources */,
 				468D42812779F30C0044E64D /* User.swift in Sources */,
+				46BC5D34278316D400AD7D40 /* Config.swift in Sources */,
+				46CBFD2227840BBB0065C13E /* UIViewExt.swift in Sources */,
 				468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */,
 				46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */,
 				468D426927795C770044E64D /* LoginVC.swift in Sources */,

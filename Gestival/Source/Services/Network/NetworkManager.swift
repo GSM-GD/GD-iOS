@@ -32,13 +32,13 @@ final class NetworkManager: NetworkManagerType{
                 switch result{
                 case let .success(res):
                     
-                    let response = try? JSONDecoder().decode(authResponseUser.self, from: res.data)
+                    let response = try? JSONDecoder().decode([authResponseUser].self, from: res.data)
                     print(response)
                     if res.statusCode == 400{
                         config.resume(throwing: GDError.emailOrPasswordIncorrect)
                         return
                     }
-                    config.resume(returning: response ?? .init(name: "", email: "", password: ""))
+                    config.resume(returning: response?.first ?? .init(name: "", email: "", password: ""))
                     
                 case let .failure(err):
                     config.resume(throwing: err)

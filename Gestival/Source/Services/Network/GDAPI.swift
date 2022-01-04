@@ -12,7 +12,7 @@ enum GDAPI{
 
 extension GDAPI: TargetType{
     var baseURL: URL {
-        return URL(string: "http://10.120.74.91:8000")!
+        return URL(string: "\(Config.url)")!
     }
     
     var path: String {
@@ -55,7 +55,8 @@ extension GDAPI: TargetType{
             return .uploadMultipart(formdata)
         case let .requestRegsiter(req):
             let form: [MultipartFormData] = [
-                MultipartFormData(provider: .data(req.name.data(using: .utf8) ?? .init()),
+                MultipartFormData(provider
+                                  : .data(req.name.data(using: .utf8) ?? .init()),
                                   name: "name"),
                 MultipartFormData(provider: .data(req.email.data(using: .utf8) ?? .init()),
                                   name: "email"),

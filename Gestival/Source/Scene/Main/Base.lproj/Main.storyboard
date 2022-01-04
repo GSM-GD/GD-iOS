@@ -44,7 +44,7 @@
                                     <constraint firstAttribute="width" constant="81" id="CSi-TI-XPz"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="code" imagePadding="0.0"/>
+                                <buttonConfiguration key="configuration" style="plain" image="heart" imagePadding="0.0"/>
                                 <connections>
                                     <action selector="itemSelectButtonDidTap:" destination="BV1-FR-VrT" eventType="touchUpInside" id="IhU-bL-GKq"/>
                                 </connections>
@@ -65,8 +65,8 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv5-Vx-3cy">
                                 <rect key="frame" x="89" y="13" width="236" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="1" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="plane" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7E-So-YZN">
@@ -129,6 +129,8 @@
                         <outlet property="isDeleteModeLabel" destination="wv5-Vx-3cy" id="clL-y8-V18"/>
                         <outlet property="itemSelectButton" destination="T5J-ac-tJH" id="28P-wh-IPh"/>
                         <outlet property="planeDetectedLbl" destination="z7E-So-YZN" id="hmi-Uf-MbL"/>
+                        <outlet property="postListButton" destination="SoJ-cC-6Uf" id="Mtc-Pc-tJU"/>
+                        <outlet property="rewriteButton" destination="65v-xp-Byz" id="tQT-kE-duq"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
                         <outlet property="screenshotButton" destination="uA2-Gc-a8q" id="jHB-8z-fP7"/>
                     </connections>
@@ -307,17 +309,33 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="afr-pX-8i8">
+                                <rect key="frame" x="364" y="145" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="AeR-Uk-h8L"/>
+                                    <constraint firstAttribute="height" constant="50" id="HuM-be-Zlg"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="shareButtonDidTap:" destination="Ppe-vI-ff7" eventType="touchUpInside" id="4Zn-ep-9cP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="RKX-H1-PrI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="afr-pX-8i8" firstAttribute="trailing" secondItem="RKX-H1-PrI" secondAttribute="trailing" id="7VZ-6v-4AH"/>
                             <constraint firstItem="RKX-H1-PrI" firstAttribute="trailing" secondItem="aHA-WD-ZbI" secondAttribute="trailing" constant="57" id="8Df-Pw-q2b"/>
+                            <constraint firstItem="afr-pX-8i8" firstAttribute="leading" secondItem="edf-VR-eQ7" secondAttribute="trailing" constant="7" id="Cuy-ab-ap6"/>
                             <constraint firstItem="edf-VR-eQ7" firstAttribute="top" secondItem="RKX-H1-PrI" secondAttribute="top" constant="20" id="GtF-RV-NkA"/>
                             <constraint firstItem="C0q-cH-wsp" firstAttribute="leading" secondItem="RKX-H1-PrI" secondAttribute="leading" constant="57" id="MSG-8A-G6k"/>
                             <constraint firstItem="C0q-cH-wsp" firstAttribute="top" secondItem="edf-VR-eQ7" secondAttribute="bottom" constant="19" id="O15-4x-3D7"/>
                             <constraint firstItem="edf-VR-eQ7" firstAttribute="leading" secondItem="RKX-H1-PrI" secondAttribute="leading" constant="57" id="ZLY-J5-ulK"/>
+                            <constraint firstItem="RKX-H1-PrI" firstAttribute="bottom" secondItem="afr-pX-8i8" secondAttribute="bottom" constant="541" id="f2I-1g-4lJ"/>
                             <constraint firstItem="aHA-WD-ZbI" firstAttribute="leading" secondItem="RKX-H1-PrI" secondAttribute="leading" constant="57" id="jWB-XC-oaW"/>
                             <constraint firstItem="RKX-H1-PrI" firstAttribute="trailing" secondItem="edf-VR-eQ7" secondAttribute="trailing" constant="57" id="k8O-eD-a9y"/>
+                            <constraint firstItem="afr-pX-8i8" firstAttribute="top" secondItem="RKX-H1-PrI" secondAttribute="top" constant="145" id="pGt-rn-788"/>
                             <constraint firstItem="RKX-H1-PrI" firstAttribute="trailing" secondItem="C0q-cH-wsp" secondAttribute="trailing" constant="57" id="uK5-6s-kkl"/>
                             <constraint firstItem="aHA-WD-ZbI" firstAttribute="top" secondItem="C0q-cH-wsp" secondAttribute="bottom" constant="40.670000000000002" id="umi-p1-ASc"/>
                         </constraints>
@@ -325,6 +343,7 @@
                     <connections>
                         <outlet property="contentLabel" destination="aHA-WD-ZbI" id="Pc1-22-XWU"/>
                         <outlet property="postImageView" destination="edf-VR-eQ7" id="Sor-LG-aFG"/>
+                        <outlet property="shareButton" destination="afr-pX-8i8" id="tOO-Cg-HJV"/>
                         <outlet property="titleLabel" destination="C0q-cH-wsp" id="jhY-w9-AcE"/>
                     </connections>
                 </viewController>
@@ -638,9 +657,10 @@
     </scenes>
     <resources>
         <image name="BACK" width="390" height="844"/>
-        <image name="code" width="265" height="208"/>
-        <image name="postButton" width="240" height="240"/>
+        <image name="heart" width="80" height="66"/>
+        <image name="postButton" width="180" height="180"/>
         <image name="square.and.arrow.down.on.square.fill" catalog="system" width="122" height="128"/>
+        <image name="square.and.arrow.up.fill" catalog="system" width="115" height="128"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

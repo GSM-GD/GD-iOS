@@ -25,7 +25,7 @@ final class PostListVC: UIViewController{
             do{
                 let posts = try await NetworkManager.shared.requestAllPost()
                 print(posts)
-                self.posts = posts
+                self.posts = posts.reversed()
             }catch{
                 self.showAlert(title: "GD", message: "게시물 불러오기에 실패했습니다", completion: nil)
             }
@@ -47,7 +47,7 @@ extension PostListVC: UICollectionViewDelegate, UICollectionViewDataSource{
         let model = posts[indexPath.row]
         cell.nameLabel.text = model.writer
         cell.titleLabel.text = model.title
-        cell.postImageView.kf.setImage(with: URL(string: "http://10.120.74.91:8000/post\(model.image)") ?? .none)
+        cell.postImageView.kf.setImage(with: URL(string: "\(Config.url)/post\(model.image)") ?? .none)
         return cell
     }
     

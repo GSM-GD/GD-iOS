@@ -16,11 +16,14 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var screenshotButton: UIButton!
     @IBOutlet weak var itemSelectButton: UIButton!
+    @IBOutlet weak var postListButton: UIButton!
     private var selectedItem: String? = "heart"
     
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var isDeleteModeLabel: UILabel!
     @IBOutlet weak var planeDetectedLbl: UILabel!
+    
+    @IBOutlet weak var rewriteButton: UIButton!
     private var selectedNode: SCNNode?
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
@@ -31,7 +34,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         let tapG = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
         let pinG = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(_:)))
         let rotateG = UILongPressGestureRecognizer(target: self, action: #selector(rotateAction(_:)))
-        rotateG.minimumPressDuration = 0.1
+        rotateG.minimumPressDuration = 0.2
         let deleteG = UITapGestureRecognizer(target: self, action: #selector(deleteAction(_:)))
         deleteG.numberOfTapsRequired = 2
         let panG = UIPanGestureRecognizer(target: self, action: #selector(panAction(_:)))
@@ -77,13 +80,37 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.showsStatistics = true
         
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        sceneView.debugOptions = [
+            ARSCNDebugOptions.showFeaturePoints,
+            ARSCNDebugOptions.showWorldOrigin
+        ]
         
         registerGesture()
         self.sceneView.autoenablesDefaultLighting = true
         screenshotButton.layer.cornerRadius = screenshotButton.frame.width / 2
         screenshotButton.clipsToBounds = true
-        screenshotButton.imageView?.contentMode = .scaleAspectFill
+        screenshotButton.imageView?.contentMode = .scaleAspectFit
+        
+        postListButton.imageView?.contentMode = .scaleAspectFit
+        postListButton.contentMode = .scaleAspectFit
+        
+        
+        deleteButton.setTitleColor(.red, for: .normal)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        itemSelectButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            itemSelectButton.widthAnchor.constraint(equalToConstant: 80),
+            itemSelectButton.heightAnchor.constraint(equalToConstant: 80)
+        ])
+        
+        deleteButton.setTitle("", for: .normal)
+        itemSelectButton.contentMode = .scaleAspectFit
+        itemSelectButton.imageView?.contentMode = .scaleAspectFit
+        itemSelectButton.setTitle("", for: .normal)
+        
+        self.rewriteButton.setTitle("", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +119,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         self.deleteButton.isHidden = false
+        
         
         sceneView.session.run(configuration)
     }
@@ -206,7 +234,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func itemSelectButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
         vc.delegate = self
-        vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
     
@@ -217,8 +244,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "uploadPostVC") as! UploadPostVC
-//        self.deleteButton.isHidden = true
-//        self.planeDetectedLbl.text = ""
         
         let image = sceneView.snapshot()
         vc.image = image
@@ -253,6 +278,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
             Task{
                 do{
                     let name = UserDefaults.standard.string(forKey: "UserName") ?? ""
+                    print(name)
                     let loaded = try await NetworkManager.shared.requestLoad(name)
                     loaded.forEach { load in
                         let scene = SCNScene(named: "art.scnassets/\(load.objectName).scn")
@@ -294,10 +320,10 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
 extension ViewController: itemVCDelegate{
     func itemDidSelected(name: String) {
         self.selectedItem = name
-        itemSelectButton.setImage(UIImage(named: selectedItem ?? ""), for: .normal)
+        itemSelectButton.contentMode = .scaleAspectFit
         itemSelectButton.imageView?.contentMode = .scaleAspectFit
-        itemSelectButton.layer.cornerRadius = itemSelectButton.frame.width / 2
-        itemSelectButton.clipsToBounds = true
+        itemSelectButton.setImage(UIImage(named: selectedItem ?? ""), for: .normal)
+        
         self.dismiss(animated: true)
     }
 }
