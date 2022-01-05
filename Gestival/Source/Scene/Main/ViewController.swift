@@ -25,6 +25,15 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBOutlet weak var rewriteButton: UIButton!
     private var selectedNode: SCNNode?
+    
+    private var centerVerticesCount: Int32 = 0
+       private var polygonVertices: [SCNVector3] = []
+       private var indices: [Int32] = []
+    private var drawingNode: SCNNode?
+       private var pointTouching: CGPoint = .zero
+    private var isDrawing: Bool = false
+    
+    private var isOnWriting: Bool = false
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
     
@@ -38,7 +47,10 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         let deleteG = UITapGestureRecognizer(target: self, action: #selector(deleteAction(_:)))
         deleteG.numberOfTapsRequired = 2
         let panG = UIPanGestureRecognizer(target: self, action: #selector(panAction(_:)))
-        [tapG, pinG, rotateG, deleteG, panG].forEach{ sceneView.addGestureRecognizer($0) }
+        
+        let drawG = UILongPressGestureRecognizer(target: self, action: #selector(drawAction(_:)))
+        drawG.minimumPressDuration = 0.1
+        [tapG, pinG, rotateG, deleteG, panG, drawG].forEach{ sceneView.addGestureRecognizer($0) }
     }
     
     func configureScreenshotButton(){
@@ -53,7 +65,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     func addItem(_ res: SCNHitTestResult) {
         if let selectedItem = selectedItem {
-             
+            
             let scene = SCNScene(named: "art.scnassets/\(selectedItem).scn")
             let node = (scene?.rootNode.childNode(withName: selectedItem, recursively: false))!
             
@@ -67,7 +79,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     // MARK: - Init
     deinit{
-//        NetworkManager.shared.requestLogout()
+        //        NetworkManager.shared.requestLogout()
     }
     
     // MARK: - Lifecycle
@@ -81,8 +93,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         sceneView.debugOptions = [
-            ARSCNDebugOptions.showFeaturePoints,
-            ARSCNDebugOptions.showWorldOrigin
+            ARSCNDebugOptions.showFeaturePoints
         ]
         
         registerGesture()
@@ -118,6 +129,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         self.navigationController?.navigationBar.isHidden = true
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
+        configuration.environmentTexturing = .automatic
         self.deleteButton.isHidden = false
         
         
@@ -130,7 +142,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.session.pause()
     }
-
+    
     // MARK: - ARSCNViewDelegate
     func session(_ session: ARSession, didFailWithError error: Error) {
         
@@ -145,6 +157,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Selector
     @objc func tapAction(_ sender: UITapGestureRecognizer){
         if isDeleteMode { return }
+        if isOnWriting { return }
         print("ASDAF")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
@@ -154,8 +167,27 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+    @objc func drawAction(_ sender: UILongPressGestureRecognizer){
+        let location = sender.location(in: sceneView)
+        if !isOnWriting { return }
+        print("ASD")
+        switch sender.state{
+        case .began:
+            pointTouching = location
+            isDrawing = true
+            begin()
+        case .changed:
+            pointTouching = location
+        case .ended:
+            reset()
+            isDrawing = false
+        default:
+            return
+        }
+    }
     
     @objc func pinchAction(_ sender: UIPinchGestureRecognizer){
+        if isOnWriting { return }
         print("pinch")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
@@ -169,6 +201,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     @objc func rotateAction(_ sender: UILongPressGestureRecognizer){
+        if isOnWriting { return }
         print("LOTATE")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
@@ -195,6 +228,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     @objc func panAction(_ sender: UIPanGestureRecognizer){
+        if isOnWriting { return }
         print("PAN")
         let scene = sender.view as! ARSCNView
         let location = sender.location(in: scene)
@@ -208,7 +242,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
             guard let selectedNode = selectedNode else {
                 return
             }
-
+            
             self.selectedNode!.position = SCNVector3(hit.worldCoordinates.x,
                                                      self.selectedNode!.position.y,
                                                      hit.worldCoordinates.z)
@@ -232,9 +266,17 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - IBAction
     
     @IBAction func itemSelectButtonDidTap(_ sender: UIButton) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
-        vc.delegate = self
-        self.present(vc, animated: true)
+        let alert = UIAlertController(title: "GD", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(.init(title: "오브젝트 선택", style: .default, handler: { _ in
+            self.isOnWriting = false
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }))
+        alert.addAction(.init(title: "직접 그리기", style: .default, handler: { _ in
+            self.isOnWriting = true
+        }))
+        present(alert, animated: true)
     }
     
     @IBAction func deleteButtonDidTap(_ sender: UIButton) {
@@ -317,6 +359,14 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
 }
 
+extension ViewController{
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if isDrawing{
+            addPointAndCreateVertices()
+        }
+    }
+}
+
 extension ViewController: itemVCDelegate{
     func itemDidSelected(name: String) {
         self.selectedItem = name
@@ -325,5 +375,96 @@ extension ViewController: itemVCDelegate{
         itemSelectButton.setImage(UIImage(named: selectedItem ?? ""), for: .normal)
         
         self.dismiss(animated: true)
+    }
+    func createBallLine() -> SCNNode {
+        let ball = SCNSphere(radius: 0.005)
+        ball.firstMaterial?.diffuse.contents = UIColor.black
+        
+        let node = SCNNode(geometry: ball)
+        return node
+    }
+}
+
+extension ViewController{
+    private func begin(){
+        drawingNode = SCNNode()
+        sceneView.scene.rootNode.addChildNode(drawingNode!)
+    }
+    
+    private func addPointAndCreateVertices() {
+        guard let camera: SCNNode = sceneView.pointOfView else {
+            return
+        }
+        
+        // world coordinates
+        let pointScreen: SCNVector3 = SCNVector3Make(Float(pointTouching.x), Float(pointTouching.y), 0.997)
+        let pointWorld: SCNVector3 = sceneView.unprojectPoint(pointScreen)
+        let pointCamera: SCNVector3 = camera.convertPosition(pointWorld, from: nil)
+        
+        // camera coordinates
+        let x: Float = pointCamera.x
+        let y: Float = pointCamera.y
+        let z: Float = -0.2
+        let lengthOfTriangle: Float = 0.01
+        
+        // triangle vertices
+        
+        // camera coordinates
+        let vertice0InCamera: SCNVector3 = SCNVector3Make(
+            x,
+            y - (sqrt(3) * lengthOfTriangle / 3),
+            z
+        )
+        let vertice1InCamera: SCNVector3 = SCNVector3Make(
+            x - lengthOfTriangle / 2,
+            y + (sqrt(3) * lengthOfTriangle / 6),
+            z
+        )
+        let vertice2InCamera: SCNVector3 = SCNVector3Make(
+            x + lengthOfTriangle / 2,
+            y +  (sqrt(3) * lengthOfTriangle / 6),
+            z
+        )
+        
+        // world coordinates
+        let vertice0: SCNVector3 = camera.convertPosition(vertice0InCamera, to: nil)
+        let vertice1: SCNVector3 = camera.convertPosition(vertice1InCamera, to: nil)
+        let vertice2: SCNVector3 = camera.convertPosition(vertice2InCamera, to: nil)
+        polygonVertices += [vertice0, vertice1, vertice2]
+        centerVerticesCount += 1
+        
+        guard centerVerticesCount > 1 else {
+            return
+        }
+        let n: Int32 = centerVerticesCount - 2
+        let m: Int32 = 3 * n
+        let nextIndices: [Int32] = [
+            m    , m + 1, m + 2, // first
+            m    , m + 1, m + 3,
+            m    , m + 2, m + 3,
+            m + 1, m + 2, m + 4,
+            m + 1, m + 3, m + 4,
+            m + 1, m + 2, m + 5,
+            m + 2, m + 3, m + 5,
+            m + 4, m + 3, m + 5, // last
+        ]
+        indices += nextIndices
+        
+        updateGeometry()
+    }
+    
+    private func reset() {
+        centerVerticesCount = 0
+        polygonVertices.removeAll()
+        indices.removeAll()
+        drawingNode = nil
+    }
+    
+    private func updateGeometry(){
+        let source = SCNGeometrySource(vertices: polygonVertices)
+        let element = SCNGeometryElement(indices: indices, primitiveType: .triangles)
+        drawingNode?.geometry = SCNGeometry(sources: [source], elements: [element])
+        drawingNode?.geometry?.firstMaterial?.diffuse.contents = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        drawingNode?.geometry?.firstMaterial?.isDoubleSided = true
     }
 }
