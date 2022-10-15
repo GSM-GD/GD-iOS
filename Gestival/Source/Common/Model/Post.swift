@@ -8,8 +8,6 @@
 import UIKit
 
 struct requestPost: Codable{
-    let title: String
-    let content: String
     let imageData: Data
 }
 
@@ -20,10 +18,7 @@ struct responsePost: Codable{
 }
 
 struct Post: Codable{
-    let writer: String
-    let content: String
-    let image: String
-    let title: String
+    let url: String
 }
 
 struct postResult: Codable{

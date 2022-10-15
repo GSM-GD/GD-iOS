@@ -1,4 +1,5 @@
 import Moya
+import Foundation
 
 enum GDAPI{
     case requestLogin(loginRequestUser)
@@ -34,7 +35,7 @@ extension GDAPI: TargetType{
         }
     }
     
-    var method: Method {
+    var method: Moya.Method {
         switch self{
         case .requestLogin, .requestRegsiter, .requestPost, .requestSave:
             return .post
@@ -43,7 +44,7 @@ extension GDAPI: TargetType{
         }
     }
     
-    var task: Task {
+    var task: Moya.Task {
         switch self{
         case let .requestLogin(req):
             let formdata: [MultipartFormData] = [
@@ -68,13 +69,6 @@ extension GDAPI: TargetType{
             return .requestPlain
         case let .requestPost(post):
             let form: [MultipartFormData] = [
-                MultipartFormData(provider: .data(post.imageData),
-                                  name: "image",fileName: "\(post.title)\(post.content).jpeg",
-                                  mimeType: "image/jpeg"),
-                MultipartFormData(provider: .data(post.title.data(using: .utf8) ?? .init()),
-                                  name: "title"),
-                MultipartFormData(provider: .data(post.content.data(using: .utf8) ?? .init()),
-                                  name: "content")
             ]
             
             return .uploadMultipart(form)

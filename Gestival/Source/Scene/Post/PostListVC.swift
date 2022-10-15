@@ -45,32 +45,37 @@ extension PostListVC: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dkanxmscell", for: indexPath) as! PostListTableViewCell
         let model = posts[indexPath.row]
-        cell.nameLabel.text = model.writer
-        cell.titleLabel.text = model.title
-        cell.postImageView.kf.setImage(with: URL(string: "\(Config.url)/post\(model.image)") ?? .none)
+        cell.postImageView.kf.setImage(with: URL(string: model.url) ?? .none)
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "postDetailVC") as! DetailPostVC
-        let model = posts[indexPath.row]
-        vc.model = model
-        self.navigationController?.pushViewController(vc, animated: true)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        contextMenuConfigurationForItemsAt indexPaths: [IndexPath],
+        point: CGPoint
+    ) -> UIContextMenuConfiguration? {
+        let context = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { (action) -> UIMenu? in
+            let index = indexPaths.first ?? .init(row: 0, section: 0)
+            let cell = collectionView.cellForItem(at: index) as! PostListTableViewCell
+            let edit = UIAction(title: "앨범에 저장", image: UIImage(systemName: "square.and.arrow.down.fill"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
+                
+                UIImageWriteToSavedPhotosAlbum(cell.postImageView.image ?? .init(), self, #selector(self.successToSave), nil)
+            }
+            let delete = UIAction(title: "공유하기", image: UIImage(systemName: "square.and.arrow.up.fill"), identifier: nil, discoverabilityTitle: nil, state: .off) { (_) in
+                let vc = UIActivityViewController(activityItems: [cell.postImageView.image ?? .init()], applicationActivities: nil)
+                vc.excludedActivityTypes = [.saveToCameraRoll]
+                self.present(vc, animated: true, completion: nil)
+            }
+            
+            return UIMenu(title: "Options", image: nil, identifier: nil, options: UIMenu.Options.displayInline, children: [edit,delete])
+        }
+        return context
+    }
+    @objc func successToSave(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        self.showAlert(title: "GD", message: "이미지가 저장되었습니다") { _ in }
     }
 }
 
-
-
-
-
-
-
-
-
 final class PostListTableViewCell: UICollectionViewCell{
-    @IBOutlet weak var nameLabel: UILabel!
-    
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
     
 }

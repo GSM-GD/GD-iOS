@@ -21,12 +21,6 @@ final class DetailPostVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         shareButton.setTitle("", for: .normal)
-        
-        self.postImageView.kf.setImage(with: URL(string: "\(Config.url)/post\(model?.image ?? "")"))
-        let image = [postImageView.image ?? .init()]
-        postImageView.setupImageViewer(images: image)
-        self.titleLabel.text = model?.title
-        self.contentLabel.text = model?.content
     }
     @IBAction func shareButtonDidTap(_ sender: UIButton) {
         let vc = UIActivityViewController(activityItems: [postImageView.image], applicationActivities: nil)

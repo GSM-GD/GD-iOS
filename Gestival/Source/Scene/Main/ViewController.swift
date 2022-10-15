@@ -35,6 +35,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     private var isOnWriting: Bool = false
     private var panStartZ: CGFloat = .zero
     private var panLast: SCNVector3 = .init()
+    private lazy var drawG = UILongPressGestureRecognizer(target: self, action: #selector(drawAction(_:)))
     
     private var isDeleteMode = false
     // MARK: - Helpers
@@ -42,14 +43,12 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         let tapG = UITapGestureRecognizer(target: self, action: #selector(tapAction(_:)))
         let pinG = UIPinchGestureRecognizer(target: self, action: #selector(pinchAction(_:)))
         let rotateG = UILongPressGestureRecognizer(target: self, action: #selector(rotateAction(_:)))
-        rotateG.minimumPressDuration = 0.2
+        rotateG.minimumPressDuration = 0.3
         let deleteG = UITapGestureRecognizer(target: self, action: #selector(deleteAction(_:)))
         deleteG.numberOfTapsRequired = 2
         let panG = UIPanGestureRecognizer(target: self, action: #selector(panAction(_:)))
         
-        let drawG = UILongPressGestureRecognizer(target: self, action: #selector(drawAction(_:)))
-        drawG.minimumPressDuration = 0.1
-        [tapG, pinG, rotateG, deleteG, panG, drawG].forEach{ sceneView.addGestureRecognizer($0) }
+        [tapG, pinG, rotateG, deleteG, panG].forEach{ sceneView.addGestureRecognizer($0) }
     }
     
     func configureScreenshotButton(){
@@ -84,6 +83,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        drawG.minimumPressDuration = 0.01
         self.screenshotButton.setBackgroundImage(.init(), for: .normal)
         configureScreenshotButton()
         
@@ -167,7 +167,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func drawAction(_ sender: UILongPressGestureRecognizer){
         let location = sender.location(in: sceneView)
-        if !isOnWriting { return }
+        if !isOnWriting || isDeleteMode { return }
         print("ASD")
         switch sender.state{
         case .began:
@@ -265,14 +265,22 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
             alert = UIAlertController(title: "GD", message: nil, preferredStyle: .actionSheet)
         }
         alert.addAction(.init(title: "오브젝트 선택", style: .default, handler: { [weak self] _ in
-            self?.isOnWriting = false
-            let vc = self?.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
+            guard let self else { return }
+            if self.isOnWriting {
+                self.sceneView.removeGestureRecognizer(self.drawG)
+            }
+            self.isOnWriting = false
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
             vc.delegate = self
-            self?.present(vc, animated: true)
+            self.present(vc, animated: true)
         }))
         alert.addAction(.init(title: "직접 그리기", style: .default, handler: { [weak self] _ in
-            self?.isOnWriting = true
-            self?.itemSelectButton.setImage(UIImage(systemName: "pencil.circle.fill")?.downSample(size: .init(width: 50, height: 50)).tintColor(.white), for: .normal)
+            guard let self else { return }
+            self.itemSelectButton.setImage(UIImage(systemName: "pencil.circle.fill")?.downSample(size: .init(width: 50, height: 50)).tintColor(.white), for: .normal)
+            if !self.isOnWriting {
+                self.sceneView.addGestureRecognizer(self.drawG)
+            }
+            self.isOnWriting = true
         }))
         alert.addAction(.init(title: "취소", style: .cancel))
         present(alert, animated: true)
@@ -280,6 +288,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     
     @IBAction func deleteButtonDidTap(_ sender: UIButton) {
         self.isDeleteMode = !isDeleteMode
+        drawG.minimumPressDuration = isDeleteMode ? 1 : 0.001
         isDeleteModeLabel.text = isDeleteMode ? "더블 클릭하여 삭제" : ""
         deleteButton.setImage(.init(systemName: "trash")?.tintColor(isDeleteMode ? .red : .white), for: .normal)
         isDeleteModeLabel.isHidden = !isDeleteMode

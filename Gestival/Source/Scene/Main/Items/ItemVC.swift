@@ -26,7 +26,8 @@ final class ItemVC: UIViewController{
         Item(imageName: "snowman", itemName: "Snowman"),
         Item(imageName: "ok", itemName: "Ok"),
         Item(imageName: "milk", itemName: "Milk"),
-        Item(imageName: "pen", itemName: "Pen")
+        Item(imageName: "pen", itemName: "Pen"),
+        Item(imageName: "glass", itemName: "glass")
     ]
     
     override func viewDidLoad() {

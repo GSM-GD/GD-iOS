@@ -1,27 +1,14 @@
 import Moya
-
-protocol NetworkManagerType: class{
-    var provider: MoyaProvider<GDAPI> { get }
-    
-    func requestLogin(_ user: loginRequestUser) async throws -> authResponseUser
-    
-    func requestRegister(_ user: registerRequestUser) async throws -> authResponseUser
-    
-    func requestLogout()
-    
-    func requestPost(_ post: requestPost) async throws -> responsePost
-    
-    func requestSave(_ objects: [Save]) async throws -> [Save]
-    
-    func requestAllPost() async throws -> [Post]
-}
+import Foundation
+import Firebase
+import FirebaseStorage
 
 enum GDError: String, Error{
     case emailOrPasswordIncorrect = "이메일/닉네임이 일치하지 않습니다."
     case emailOrnameIsAlreadyExist = "이메일/닉네임이 이미 존재합니다."
 }
 
-final class NetworkManager: NetworkManagerType{
+final class NetworkManager {
     static let shared = NetworkManager()
     
     var provider: MoyaProvider<GDAPI> = .init()
@@ -70,24 +57,30 @@ final class NetworkManager: NetworkManagerType{
         })
     }
     
-    func requestPost(_ post: requestPost) async throws -> responsePost{
-        try await withCheckedThrowingContinuation { config in
-            provider.request(.requestPost(post)) { result in
-                switch result{
-                case let .success(res):
-                    do{
-                        print(try res.mapJSON())
-                        let response = try JSONDecoder().decode(responsePost.self, from: res.data)
-                        config.resume(returning: response)
-                    }catch{
-                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
-                    }
-                case let .failure(err):
-                    config.resume(throwing: err)
-                }
-                
-            }
+    func uploadImage(_ data: Data) async throws -> String {
+        let fileName = UUID().uuidString
+        let ref = Storage.storage().reference(withPath: "/feed/\(fileName)")
+        _ = try await ref.putDataAsync(data)
+        let url = try await ref.downloadURL().absoluteString
+        return url
+    }
+    
+    func requestPost(_ post: requestPost) async throws {
+        let url = try await uploadImage(post.imageData)
+        let data: [String: Any] = [
+            "url": url
+        ]
+        _ = Firestore.firestore().collection("/feed").addDocument(data: data)
+    }
+    
+    func requestAllPost() async throws -> [Post] {
+        let docs = try await Firestore.firestore().collection("/feed").getDocuments()
+        var res: [Post] = []
+        for snapshot in docs.documents {
+            let dict = snapshot.data()
+            res.append(.init(url: dict["url"] as? String ?? ""))
         }
+        return res
     }
     
     func requestSave(_ objects: [Save]) async throws -> [Save] {
@@ -126,25 +119,6 @@ final class NetworkManager: NetworkManagerType{
                 case let .failure(err):
                     config.resume(throwing: err)
                 }
-            }
-        })
-    }
-    
-    func requestAllPost() async throws -> [Post] {
-        try await withCheckedThrowingContinuation({ config in
-            provider.request(.requestAllPost) { result in
-                switch result{
-                case let .success(res):
-                    do{
-                        let posts = try JSONDecoder().decode([Post].self, from: res.data)
-                        config.resume(returning: posts)
-                    }catch{
-                        config.resume(throwing: GDError.emailOrnameIsAlreadyExist)
-                    }
-                case let .failure(err):
-                    config.resume(throwing: err)
-                }
-            
             }
         })
     }

@@ -23,6 +23,13 @@
 		46BC5D34278316D400AD7D40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BC5D33278316D400AD7D40 /* Config.swift */; };
 		46C18F4328FA10CB00ACC78C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C18F4228FA10CB00ACC78C /* PaddingLabel.swift */; };
 		46C18F4628FA51CC00ACC78C /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C18F4528FA51CC00ACC78C /* UIImageExt.swift */; };
+		46C18F4928FA820200ACC78C /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F4828FA820200ACC78C /* Moya */; };
+		46C18F4C28FA825A00ACC78C /* ImageViewer_swift in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F4B28FA825A00ACC78C /* ImageViewer_swift */; };
+		46C18F4F28FA826600ACC78C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F4E28FA826600ACC78C /* Kingfisher */; };
+		46C18F5228FA85B200ACC78C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F5128FA85B200ACC78C /* FirebaseFirestore */; };
+		46C18F5428FA85B200ACC78C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F5328FA85B200ACC78C /* FirebaseFirestoreSwift */; };
+		46C18F5628FA85B200ACC78C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 46C18F5528FA85B200ACC78C /* FirebaseStorage */; };
+		46C18F5828FA863300ACC78C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46C18F5728FA863300ACC78C /* GoogleService-Info.plist */; };
 		46CBFD2227840BBB0065C13E /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CBFD2127840BBB0065C13E /* UIViewExt.swift */; };
 		46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */; };
 		46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C3277D7A9D00AFBA18 /* ItemVC.swift */; };
@@ -35,9 +42,6 @@
 		46EE1BF8276B30B300ABFC31 /* GestivalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1BF7276B30B300ABFC31 /* GestivalTests.swift */; };
 		46EE1C02276B30B300ABFC31 /* GestivalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1C01276B30B300ABFC31 /* GestivalUITests.swift */; };
 		46EE1C04276B30B300ABFC31 /* GestivalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE1C03276B30B300ABFC31 /* GestivalUITestsLaunchTests.swift */; };
-		7517349A7D76820C0A007CBF /* Pods_Gestival_GestivalUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C844250451D2926DB8B9FA /* Pods_Gestival_GestivalUITests.framework */; };
-		90886D5676DBBB075C9EA770 /* Pods_Gestival.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145F9FD8601F78C845E2BFB6 /* Pods_Gestival.framework */; };
-		D68DE247816B0DB33AAEFB7F /* Pods_GestivalTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 104E61045B93F9666AB27B1C /* Pods_GestivalTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,10 +62,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		104E61045B93F9666AB27B1C /* Pods_GestivalTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GestivalTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		145F9FD8601F78C845E2BFB6 /* Pods_Gestival.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gestival.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		26D7DA02B937BC54C1127675 /* Pods-Gestival-GestivalUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival-GestivalUITests.debug.xcconfig"; path = "Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestivalTests.debug.xcconfig"; path = "Target Support Files/Pods-GestivalTests/Pods-GestivalTests.debug.xcconfig"; sourceTree = "<group>"; };
 		462C451E277DA62E0022AAC1 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		462C4523277DC49E0022AAC1 /* Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
 		462C4529277E84AC0022AAC1 /* UploadPostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadPostVC.swift; sourceTree = "<group>"; };
@@ -82,6 +82,7 @@
 		46BC5D33278316D400AD7D40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		46C18F4228FA10CB00ACC78C /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		46C18F4528FA51CC00ACC78C /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		46C18F5728FA863300ACC78C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46CBFD2127840BBB0065C13E /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		46D979C3277D7A9D00AFBA18 /* ItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVC.swift; sourceTree = "<group>"; };
@@ -98,11 +99,6 @@
 		46EE1BFD276B30B300ABFC31 /* GestivalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GestivalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE1C01276B30B300ABFC31 /* GestivalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestivalUITests.swift; sourceTree = "<group>"; };
 		46EE1C03276B30B300ABFC31 /* GestivalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestivalUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8118CAF8BB9F7F6367757A57 /* Pods-Gestival.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival.debug.xcconfig"; path = "Target Support Files/Pods-Gestival/Pods-Gestival.debug.xcconfig"; sourceTree = "<group>"; };
-		99484E993489F29F0BFA583E /* Pods-Gestival-GestivalUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival-GestivalUITests.release.xcconfig"; path = "Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests.release.xcconfig"; sourceTree = "<group>"; };
-		B68F6A7690162EB99DC33E64 /* Pods-Gestival.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Gestival.release.xcconfig"; path = "Target Support Files/Pods-Gestival/Pods-Gestival.release.xcconfig"; sourceTree = "<group>"; };
-		C04BF0C3A5530138843F5C65 /* Pods-GestivalTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GestivalTests.release.xcconfig"; path = "Target Support Files/Pods-GestivalTests/Pods-GestivalTests.release.xcconfig"; sourceTree = "<group>"; };
-		D5C844250451D2926DB8B9FA /* Pods_Gestival_GestivalUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Gestival_GestivalUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +106,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90886D5676DBBB075C9EA770 /* Pods_Gestival.framework in Frameworks */,
+				46C18F5428FA85B200ACC78C /* FirebaseFirestoreSwift in Frameworks */,
+				46C18F4F28FA826600ACC78C /* Kingfisher in Frameworks */,
+				46C18F5228FA85B200ACC78C /* FirebaseFirestore in Frameworks */,
+				46C18F4C28FA825A00ACC78C /* ImageViewer_swift in Frameworks */,
+				46C18F4928FA820200ACC78C /* Moya in Frameworks */,
+				46C18F5628FA85B200ACC78C /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D68DE247816B0DB33AAEFB7F /* Pods_GestivalTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,23 +126,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7517349A7D76820C0A007CBF /* Pods_Gestival_GestivalUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		09AA7A3EA61207973D1ECDDC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				145F9FD8601F78C845E2BFB6 /* Pods_Gestival.framework */,
-				D5C844250451D2926DB8B9FA /* Pods_Gestival_GestivalUITests.framework */,
-				104E61045B93F9666AB27B1C /* Pods_GestivalTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		468D426E27799B3E0044E64D /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,8 +262,6 @@
 				46EE1BF6276B30B300ABFC31 /* GestivalTests */,
 				46EE1C00276B30B300ABFC31 /* GestivalUITests */,
 				46EE1BDF276B30B200ABFC31 /* Products */,
-				EBBFE2FB073297F13099657D /* Pods */,
-				09AA7A3EA61207973D1ECDDC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -293,6 +280,7 @@
 			children = (
 				46EE1BE3276B30B200ABFC31 /* art.scnassets */,
 				4657AD6B277AA88200E4F006 /* Info.plist */,
+				46C18F5728FA863300ACC78C /* GoogleService-Info.plist */,
 				46EE1C13276B318A00ABFC31 /* Resource */,
 				46EE1C11276B317600ABFC31 /* App */,
 				46EE1C10276B317200ABFC31 /* Source */,
@@ -387,19 +375,6 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
-		EBBFE2FB073297F13099657D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				8118CAF8BB9F7F6367757A57 /* Pods-Gestival.debug.xcconfig */,
-				B68F6A7690162EB99DC33E64 /* Pods-Gestival.release.xcconfig */,
-				26D7DA02B937BC54C1127675 /* Pods-Gestival-GestivalUITests.debug.xcconfig */,
-				99484E993489F29F0BFA583E /* Pods-Gestival-GestivalUITests.release.xcconfig */,
-				2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */,
-				C04BF0C3A5530138843F5C65 /* Pods-GestivalTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -407,17 +382,23 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46EE1C07276B30B300ABFC31 /* Build configuration list for PBXNativeTarget "Gestival" */;
 			buildPhases = (
-				8857353ED76689C64C6E688C /* [CP] Check Pods Manifest.lock */,
 				46EE1BDA276B30B200ABFC31 /* Sources */,
 				46EE1BDB276B30B200ABFC31 /* Frameworks */,
 				46EE1BDC276B30B200ABFC31 /* Resources */,
-				AED6E88F010763B467032C3E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Gestival;
+			packageProductDependencies = (
+				46C18F4828FA820200ACC78C /* Moya */,
+				46C18F4B28FA825A00ACC78C /* ImageViewer_swift */,
+				46C18F4E28FA826600ACC78C /* Kingfisher */,
+				46C18F5128FA85B200ACC78C /* FirebaseFirestore */,
+				46C18F5328FA85B200ACC78C /* FirebaseFirestoreSwift */,
+				46C18F5528FA85B200ACC78C /* FirebaseStorage */,
+			);
 			productName = Gestival;
 			productReference = 46EE1BDE276B30B200ABFC31 /* Gestival.app */;
 			productType = "com.apple.product-type.application";
@@ -426,7 +407,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46EE1C0A276B30B300ABFC31 /* Build configuration list for PBXNativeTarget "GestivalTests" */;
 			buildPhases = (
-				FB700568BDA4A0692BD3210B /* [CP] Check Pods Manifest.lock */,
 				46EE1BEF276B30B300ABFC31 /* Sources */,
 				46EE1BF0276B30B300ABFC31 /* Frameworks */,
 				46EE1BF1276B30B300ABFC31 /* Resources */,
@@ -445,11 +425,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 46EE1C0D276B30B300ABFC31 /* Build configuration list for PBXNativeTarget "GestivalUITests" */;
 			buildPhases = (
-				1600778EC428F25887E26B21 /* [CP] Check Pods Manifest.lock */,
 				46EE1BF9276B30B300ABFC31 /* Sources */,
 				46EE1BFA276B30B300ABFC31 /* Frameworks */,
 				46EE1BFB276B30B300ABFC31 /* Resources */,
-				7432C6E408976E25234D98E6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -493,6 +471,12 @@
 				Base,
 			);
 			mainGroup = 46EE1BD5276B30B200ABFC31;
+			packageReferences = (
+				46C18F4728FA820200ACC78C /* XCRemoteSwiftPackageReference "Moya" */,
+				46C18F4A28FA825A00ACC78C /* XCRemoteSwiftPackageReference "ImageViewer.swift" */,
+				46C18F4D28FA826600ACC78C /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				46C18F5028FA85B200ACC78C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 46EE1BDF276B30B200ABFC31 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -511,6 +495,7 @@
 			files = (
 				46EE1BE4276B30B200ABFC31 /* art.scnassets in Resources */,
 				46EE1BEE276B30B300ABFC31 /* LaunchScreen.storyboard in Resources */,
+				46C18F5828FA863300ACC78C /* GoogleService-Info.plist in Resources */,
 				46EE1BEB276B30B300ABFC31 /* Assets.xcassets in Resources */,
 				468D426B277960310044E64D /* Main.storyboard in Resources */,
 			);
@@ -531,109 +516,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		1600778EC428F25887E26B21 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Gestival-GestivalUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7432C6E408976E25234D98E6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gestival-GestivalUITests/Pods-Gestival-GestivalUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8857353ED76689C64C6E688C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Gestival-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AED6E88F010763B467032C3E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gestival/Pods-Gestival-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Gestival/Pods-Gestival-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Gestival/Pods-Gestival-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FB700568BDA4A0692BD3210B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-GestivalTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46EE1BDA276B30B200ABFC31 /* Sources */ = {
@@ -834,7 +716,6 @@
 		};
 		46EE1C08276B30B300ABFC31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8118CAF8BB9F7F6367757A57 /* Pods-Gestival.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -843,14 +724,16 @@
 				DEVELOPMENT_TEAM = 235C2RVZ7L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gestival/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Enable the camera for AR content";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "앨범에 사진을 추가하기 위해 권한이 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -867,7 +750,6 @@
 		};
 		46EE1C09276B30B300ABFC31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B68F6A7690162EB99DC33E64 /* Pods-Gestival.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -876,14 +758,16 @@
 				DEVELOPMENT_TEAM = 235C2RVZ7L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gestival/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Enable the camera for AR content";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "앨범에 사진을 추가하기 위해 권한이 필요합니다!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -900,7 +784,6 @@
 		};
 		46EE1C0B276B30B300ABFC31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A5CC5DE4B9634C09B455509 /* Pods-GestivalTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -926,7 +809,6 @@
 		};
 		46EE1C0C276B30B300ABFC31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C04BF0C3A5530138843F5C65 /* Pods-GestivalTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -952,7 +834,6 @@
 		};
 		46EE1C0E276B30B300ABFC31 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 26D7DA02B937BC54C1127675 /* Pods-Gestival-GestivalUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -976,7 +857,6 @@
 		};
 		46EE1C0F276B30B300ABFC31 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99484E993489F29F0BFA583E /* Pods-Gestival-GestivalUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -1038,6 +918,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		46C18F4728FA820200ACC78C /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		46C18F4A28FA825A00ACC78C /* XCRemoteSwiftPackageReference "ImageViewer.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/michaelhenry/ImageViewer.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+		46C18F4D28FA826600ACC78C /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		46C18F5028FA85B200ACC78C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		46C18F4828FA820200ACC78C /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F4728FA820200ACC78C /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		46C18F4B28FA825A00ACC78C /* ImageViewer_swift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F4A28FA825A00ACC78C /* XCRemoteSwiftPackageReference "ImageViewer.swift" */;
+			productName = ImageViewer_swift;
+		};
+		46C18F4E28FA826600ACC78C /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F4D28FA826600ACC78C /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		46C18F5128FA85B200ACC78C /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F5028FA85B200ACC78C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		46C18F5328FA85B200ACC78C /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F5028FA85B200ACC78C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		46C18F5528FA85B200ACC78C /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46C18F5028FA85B200ACC78C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46EE1BD6276B30B200ABFC31 /* Project object */;
 }

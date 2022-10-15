@@ -9,11 +9,7 @@ import UIKit
 final class UploadPostVC: UIViewController{
     // MARK: - Properties
     @IBOutlet weak var imageVIew: UIImageView!
-    
-    @IBOutlet weak var titleTextField: UITextField!
-    
-    @IBOutlet weak var contentTextView: UITextView!
-    
+    @IBOutlet weak var saveButton: UIButton!
     
     var image: UIImage?
     
@@ -24,8 +20,6 @@ final class UploadPostVC: UIViewController{
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "게시", style: .plain, target: self, action: #selector(postButtonDidTap))
         }
         print("AS")
-        contentTextView.layer.borderWidth = 1
-        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
         self.hideKeyboard()
     }
     
@@ -37,9 +31,7 @@ final class UploadPostVC: UIViewController{
     // MARK: - Selector
     @objc private func postButtonDidTap(){
         
-        let req = requestPost(title: titleTextField.text ?? "",
-                              content: contentTextView.text ?? "",
-                              imageData: image?.jpegData(compressionQuality: 0.95) ?? .init())
+        let req = requestPost(imageData: image?.jpegData(compressionQuality: 0.95) ?? .init())
         Task{
             do{
                 _ = try await NetworkManager.shared.requestPost(req)
@@ -52,6 +44,21 @@ final class UploadPostVC: UIViewController{
             }
             
         }
-        
+    }
+    
+    @IBAction func saveButtonDidTap(_ sender: UIButton) {
+        guard let image else { return }
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(successToSave), nil)
+    }
+    
+    @IBAction func shareButtonDidTap(_ sender: UIButton) {
+        guard let image else { return }
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        vc.excludedActivityTypes = [.saveToCameraRoll]
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func successToSave() {
+        self.showAlert(title: "GD", message: "이미지가 저장되었습니다") { _ in }
     }
 }
