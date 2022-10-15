@@ -8,5 +8,5 @@
 import Foundation
 
 final class Config{
-    static let url: String = "http://192.168.0.141:8000"
+    static let url: String = "http://10.120.74.91:8000"
 }

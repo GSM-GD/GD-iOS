@@ -32,10 +32,7 @@ final class UploadPostVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.imageVIew.image = image
-        
     }
-    
-    
     
     // MARK: - Selector
     @objc private func postButtonDidTap(){

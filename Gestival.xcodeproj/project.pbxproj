@@ -21,6 +21,8 @@
 		468D42812779F30C0044E64D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42802779F30C0044E64D /* User.swift */; };
 		468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468D42822779FC8A0044E64D /* NetworkManager.swift */; };
 		46BC5D34278316D400AD7D40 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46BC5D33278316D400AD7D40 /* Config.swift */; };
+		46C18F4328FA10CB00ACC78C /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C18F4228FA10CB00ACC78C /* PaddingLabel.swift */; };
+		46C18F4628FA51CC00ACC78C /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46C18F4528FA51CC00ACC78C /* UIImageExt.swift */; };
 		46CBFD2227840BBB0065C13E /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CBFD2127840BBB0065C13E /* UIViewExt.swift */; };
 		46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */; };
 		46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46D979C3277D7A9D00AFBA18 /* ItemVC.swift */; };
@@ -78,6 +80,8 @@
 		468D42802779F30C0044E64D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		468D42822779FC8A0044E64D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		46BC5D33278316D400AD7D40 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		46C18F4228FA10CB00ACC78C /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		46C18F4528FA51CC00ACC78C /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		46CBFD2127840BBB0065C13E /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		46D9798F277C84D600AFBA18 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		46D979C3277D7A9D00AFBA18 /* ItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemVC.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 		468D426E27799B3E0044E64D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				46C18F4128FA10C400ACC78C /* View */,
 				468D427F2779F3070044E64D /* Model */,
 				468D42732779AFC20044E64D /* Extensions */,
 			);
@@ -210,6 +215,22 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		46C18F4128FA10C400ACC78C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				46C18F4228FA10CB00ACC78C /* PaddingLabel.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		46C18F4428FA51C000ACC78C /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				46C18F4528FA51CC00ACC78C /* UIImageExt.swift */,
+			);
+			path = UIImage;
+			sourceTree = "<group>";
+		};
 		46CBFD2027840BB50065C13E /* UIView */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +242,7 @@
 		46D9798A277C847800AFBA18 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				46C18F4428FA51C000ACC78C /* UIImage */,
 				46CBFD2027840BB50065C13E /* UIView */,
 				46D9798B277C847A00AFBA18 /* UIViewController */,
 			);
@@ -326,7 +348,6 @@
 		46EE1C13276B318A00ABFC31 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				46EE1C14276B337000ABFC31 /* SCN */,
 				46EE1BEA276B30B300ABFC31 /* Assets.xcassets */,
 				468D42662779573E0044E64D /* Segoe UI Bold Italic.ttf */,
 				468D42652779573E0044E64D /* Segoe UI Bold.ttf */,
@@ -335,13 +356,6 @@
 				46EE1BEC276B30B300ABFC31 /* LaunchScreen.storyboard */,
 			);
 			path = Resource;
-			sourceTree = "<group>";
-		};
-		46EE1C14276B337000ABFC31 /* SCN */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SCN;
 			sourceTree = "<group>";
 		};
 		46EE1C15276B354D00ABFC31 /* Main */ = {
@@ -626,6 +640,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46C18F4628FA51CC00ACC78C /* UIImageExt.swift in Sources */,
 				46D97990277C84D600AFBA18 /* UIViewControllerExt.swift in Sources */,
 				468D42832779FC8A0044E64D /* NetworkManager.swift in Sources */,
 				468D427E2779E08D0044E64D /* GDAPI.swift in Sources */,
@@ -642,6 +657,7 @@
 				468D426D27796A0A0044E64D /* RegisterVC.swift in Sources */,
 				46EE1BE2276B30B200ABFC31 /* AppDelegate.swift in Sources */,
 				468D426927795C770044E64D /* LoginVC.swift in Sources */,
+				46C18F4328FA10CB00ACC78C /* PaddingLabel.swift in Sources */,
 				462C452E277EAAEA0022AAC1 /* DetailPostVC.swift in Sources */,
 				462C4524277DC49E0022AAC1 /* Save.swift in Sources */,
 				46D979C4277D7A9D00AFBA18 /* ItemVC.swift in Sources */,

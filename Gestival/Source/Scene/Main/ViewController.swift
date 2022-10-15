@@ -23,7 +23,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var isDeleteModeLabel: UILabel!
     @IBOutlet weak var planeDetectedLbl: UILabel!
     
-    @IBOutlet weak var rewriteButton: UIButton!
     private var selectedNode: SCNNode?
     
     private var centerVerticesCount: Int32 = 0
@@ -85,7 +84,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.screenshotButton.setBackgroundImage(.init(), for: .normal)
         configureScreenshotButton()
         
         sceneView.delegate = self
@@ -121,7 +120,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         itemSelectButton.imageView?.contentMode = .scaleAspectFit
         itemSelectButton.setTitle("", for: .normal)
         
-        self.rewriteButton.setTitle("", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -239,7 +237,7 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         case .changed:
             guard let hit = scene.hitTest(location, options: nil).first else { return }
             
-            guard let selectedNode = selectedNode else {
+            guard selectedNode != nil else {
                 return
             }
             
@@ -255,34 +253,36 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard anchor is ARPlaneAnchor else { return }
-        DispatchQueue.main.async {
-            self.planeDetectedLbl.text = "Plane"
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.planeDetectedLbl.text = ""
-            }
-        }
+        
     }
     // MARK: - IBAction
     
     @IBAction func itemSelectButtonDidTap(_ sender: UIButton) {
-        let alert = UIAlertController(title: "GD", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(.init(title: "오브젝트 선택", style: .default, handler: { _ in
-            self.isOnWriting = false
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
+        let alert: UIAlertController
+        if traitCollection.userInterfaceIdiom == .pad {
+            alert = UIAlertController(title: "GD", message: nil, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "GD", message: nil, preferredStyle: .actionSheet)
+        }
+        alert.addAction(.init(title: "오브젝트 선택", style: .default, handler: { [weak self] _ in
+            self?.isOnWriting = false
+            let vc = self?.storyboard?.instantiateViewController(withIdentifier: "itemSelectVC") as! ItemVC
             vc.delegate = self
-            self.present(vc, animated: true)
+            self?.present(vc, animated: true)
         }))
-        alert.addAction(.init(title: "직접 그리기", style: .default, handler: { _ in
-            self.isOnWriting = true
+        alert.addAction(.init(title: "직접 그리기", style: .default, handler: { [weak self] _ in
+            self?.isOnWriting = true
+            self?.itemSelectButton.setImage(UIImage(systemName: "pencil.circle.fill")?.downSample(size: .init(width: 50, height: 50)).tintColor(.white), for: .normal)
         }))
+        alert.addAction(.init(title: "취소", style: .cancel))
         present(alert, animated: true)
     }
     
     @IBAction func deleteButtonDidTap(_ sender: UIButton) {
         self.isDeleteMode = !isDeleteMode
-        isDeleteModeLabel.text = isDeleteMode ? "Delete Mode" : ""
-        
+        isDeleteModeLabel.text = isDeleteMode ? "더블 클릭하여 삭제" : ""
+        deleteButton.setImage(.init(systemName: "trash")?.tintColor(isDeleteMode ? .red : .white), for: .normal)
+        isDeleteModeLabel.isHidden = !isDeleteMode
     }
     @IBAction func screenshotButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "uploadPostVC") as! UploadPostVC
@@ -291,66 +291,6 @@ final class ViewController: UIViewController, ARSCNViewDelegate {
         vc.image = image
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
-    @IBAction func saveButtonDidTap(_ sender: UIButton) {
-        let alert = UIAlertController(title: "GD", message: "save / load", preferredStyle: .actionSheet)
-        let save = UIAlertAction(title: "저장", style: .default) { _ in
-            let objects: [Save] = self.sceneView.scene.rootNode
-                .childNodes
-                .map{
-                    Save(
-                        objectName: $0.name ?? "",
-                        x: Double($0.worldPosition.x),
-                        y: Double($0.worldPosition.y),
-                        z: Double($0.worldPosition.z)
-                    )
-                }
-            
-            Task {
-                do{
-                    _ = try await NetworkManager.shared.requestSave(objects)
-                    
-                }catch{
-                    self.showAlert(title: "GD", message: "세이브를 실패했습니다", completion: nil)
-                }
-                
-            }
-        }
-        let load = UIAlertAction(title: "불러오기", style: .default) { _ in
-            Task{
-                do{
-                    let name = UserDefaults.standard.string(forKey: "UserName") ?? ""
-                    print(name)
-                    let loaded = try await NetworkManager.shared.requestLoad(name)
-                    loaded.forEach { load in
-                        let scene = SCNScene(named: "art.scnassets/\(load.objectName).scn")
-                        let node = (scene?.rootNode.childNode(withName: load.objectName, recursively: false))!
-                        node.position = SCNVector3(load.x, load.y, load.z)
-                        self.sceneView.scene.rootNode.addChildNode(node)
-                    }
-                } catch {
-                    self.showAlert(title: "GD", message: "불러오기를 실패했습니다.", completion: nil)
-                }
-            }
-        }
-        let reset = UIAlertAction(title: "초기화", style: .default) { _ in
-            self.sceneView.scene.rootNode.childNodes.forEach { node in
-                node.removeFromParentNode()
-                node.removeAllActions()
-            }
-        }
-        
-        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        
-        alert.addAction(save)
-        alert.addAction(load)
-        alert.addAction(reset)
-        alert.addAction(cancel)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    
     
     @IBAction func postListButtonDidTap(_ sender: UIButton) {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "postListVC") as! PostListVC
@@ -372,7 +312,7 @@ extension ViewController: itemVCDelegate{
         self.selectedItem = name
         itemSelectButton.contentMode = .scaleAspectFit
         itemSelectButton.imageView?.contentMode = .scaleAspectFit
-        itemSelectButton.setImage(UIImage(named: selectedItem ?? ""), for: .normal)
+        itemSelectButton.setImage(UIImage(named: selectedItem ?? "")?.downSample(size: .init(width: 50, height: 50)), for: .normal)
         
         self.dismiss(animated: true)
     }

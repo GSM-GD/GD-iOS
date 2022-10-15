@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol itemVCDelegate: class{
+protocol itemVCDelegate: AnyObject {
     func itemDidSelected(name: String)
 }
 
@@ -44,7 +44,6 @@ extension ItemVC: UICollectionViewDelegate, UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "itemCell", for: indexPath) as! ItemCell
         let data = dataSource[indexPath.row]
         cell.imageView.image = UIImage(named: data.imageName)
-        cell.itemLabel.text = data.itemName
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
