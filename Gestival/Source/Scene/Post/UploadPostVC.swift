@@ -35,10 +35,7 @@ final class UploadPostVC: UIViewController{
         Task{
             do{
                 _ = try await NetworkManager.shared.requestPost(req)
-                self.showAlert(title: "GD", message: "게시물 업로드를 성공했습니다.") { _ in
-                    self.navigationController?.popViewController(animated: true)
-                }
-                self.navigationController?.popViewController(animated: true)
+                self.showAlert(title: "GD", message: "게시물 업로드를 성공했습니다.", completion: nil)
             }catch{
                 self.showAlert(title: "GD", message: "게시물 업로드를 실패했습니다", completion: nil)
             }
@@ -55,10 +52,13 @@ final class UploadPostVC: UIViewController{
         guard let image else { return }
         let vc = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         vc.excludedActivityTypes = [.saveToCameraRoll]
+        vc.popoverPresentationController?.sourceView = view
+        vc.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+        vc.popoverPresentationController?.permittedArrowDirections = []
         present(vc, animated: true, completion: nil)
     }
     
-    @objc func successToSave() {
+    @objc func successToSave(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         self.showAlert(title: "GD", message: "이미지가 저장되었습니다") { _ in }
     }
 }
